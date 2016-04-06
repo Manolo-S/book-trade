@@ -1,4 +1,4 @@
 'use strict';
-console.log('Hello World');
+console.log('index.js called');
 
 require ('../css/index.css');

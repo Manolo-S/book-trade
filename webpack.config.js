@@ -3,7 +3,10 @@ var path = require('path');
 
 module.exports = {
 	context: path.resolve('./public/javascripts'),
-	entry: {index: './index.js'},
+	entry: {
+			index: './index.js',
+			mybooks: './mybooks.js'
+			},
 	output: {
 		path: path.resolve('build/js'),
 		publicPath: '/public/assets/js/',

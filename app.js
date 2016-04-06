@@ -8,6 +8,7 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 
 var index = require('./routes/index');
+var mybooks = require('./routes/mybooks');
 // var auth = require('./routes/auth');
 
 var app = express();
@@ -21,7 +22,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
-
+app.use('/mybooks', mybooks);
 
 app.use(logger('dev'));
 
