@@ -3,3 +3,6 @@ body {
 	color: green;
 }
 
+li span {
+	display: none;
+}

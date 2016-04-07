@@ -363,7 +363,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(3)();
-	exports.push([module.id, "body {\n\tfont-family: Arial;\n\tcolor: green;\n}\n\n", ""]);
+	exports.push([module.id, "body {\n\tfont-family: Arial;\n\tcolor: green;\n}", ""]);
 
 /***/ }
 /******/ ]);

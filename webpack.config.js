@@ -2,7 +2,7 @@ var path = require('path');
 
 
 module.exports = {
-	context: path.resolve('./public/javascripts'),
+	context: path.resolve('./public/js'),
 	entry: {
 			index: './index.js',
 			mybooks: './mybooks.js'
@@ -41,3 +41,4 @@ module.exports = {
 		extensions: ['', '.js', '.es6']
 	}
 }
+

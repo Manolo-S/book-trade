@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>My books</title>
-  </head>
-  <body>
-    <h1>My books</h1>
-    <script src="/build/js/mybooks.js"></script>
-  </body>
+<html  lang='en'>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name='viewport' content='width=device-width, inital-scale=1'>
+		<script src='lib/jquery.2.2.1.js'></script>
+		<script src='lib/bootstrap.3.3.6.js'></script>
+		<link href='lib/bootstrap.3.3.6.css' rel='stylesheet'>
+		<link href='lib/font-awesome.min.css' rel='stylesheet'>
+		<title>My books</title>
+		<!-- <link href='../public/css/mybooks.css' rel='stylesheet'/> -->
+	</head>
+	<body>
+		<nav class='navbar navbar-default container'>
+			<div class='navbar-header'>
+				<a class='navbar-brand' href='#' id='brand'>Book Trader</a>
+			</div>
+			<ul class='nav navbar-nav navbar-right'>
+				<li>
+					<a class='twitter' id='twitter-a' href='/auth/twitter'><i class=
+					'fa fa-twitter' id='twitter'></i></a>
+				</li>
+				<li>
+					<a class='facebook' id='facebook-a' href='/auth/facebook'><i class=
+					'fa fa-facebook' id='facebook'></i></a>
+				</li>
+				<li><span id='id'><%=user.id%></span></li>
+				<li><span id='service'><%=user.service%></span></li>
+			</ul>
+		</nav>
+		<script src='/build/js/mybooks.js'></script>
+	</body>
 </html>
