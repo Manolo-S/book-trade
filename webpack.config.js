@@ -5,7 +5,8 @@ module.exports = {
 	context: path.resolve('./public/js'),
 	entry: {
 		index: './index.js',
-		mybooks: './mybooks.js'
+		mybooks: './mybooks.js',
+		mybooks2: './mybooks-2.js'
 	},
 	output: {
 		path: path.resolve('build/js'),
