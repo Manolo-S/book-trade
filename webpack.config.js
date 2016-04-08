@@ -39,6 +39,9 @@ module.exports = {
 	},
 
 	resolve: {
+		// alias: {
+  //           jquery: path.resolve(__dirname, 'public', 'lib', 'jquery-2.2.3.js')
+  //       },
 		extensions: ['', '.js', '.es6']
 	}
 }

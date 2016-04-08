@@ -1,8 +1,16 @@
-body {
-	font-family: Arial;
-	color: green;
+body
+{
+    font-family: Arial;
+
+    color: green;
 }
 
-li span {
-	display: none;
+li span
+{
+    display: none;
+}
+
+#search-button
+{
+    cursor: pointer;
 }
