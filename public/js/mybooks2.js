@@ -6,9 +6,8 @@
 	var bookId;
 
 	function authorsFun(author, index) {
-
-		if (index === book.authors.length) {
-			authors += 'and ' + author;
+		if (index === book.authors.length - 1) {
+			authors += author;
 		} else {
 			authors += author + ', ';
 		}
@@ -26,7 +25,7 @@
 		for (var i = 0; i < response.items.length; i++) {
 			var item = response.items[i];
 			// in production code, item.text should have the HTML entities escaped.
-			authors = "";
+			authors = '';
 			book = item.volumeInfo;
 			var bookIdArr = book.industryIdentifiers;
 			if (bookIdArr.length === 1){ //pre-isbn era books can have a non-ISBN identifier e.g. OSU
