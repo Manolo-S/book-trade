@@ -1,10 +1,9 @@
 'use strict';
 
 (function bookListFun() {
-	require('../css/mybooks2.css');
-	
 	var authors;
 	var book;
+	var bookId;
 
 	function authorsFun(author, index) {
 
@@ -12,6 +11,12 @@
 			authors += 'and ' + author;
 		} else {
 			authors += author + ', ';
+		}
+	}
+
+	function isbn13Fun (identifier){
+		if (identifier.type === 'ISBN_13'){
+			bookId = 'ISBN-13: ' + identifier.identifier;
 		}
 	}
 
@@ -23,7 +28,13 @@
 			// in production code, item.text should have the HTML entities escaped.
 			authors = "";
 			book = item.volumeInfo;
-			// console.log('book', book);
+			var bookIdArr = book.industryIdentifiers;
+			if (bookIdArr.length === 1){ //pre-isbn era books can have a non-ISBN identifier e.g. OSU
+				bookId = bookIdArr[0].identifier; 
+			} else {
+				bookIdArr.map(isbn13Fun);
+			}
+			console.log('book', book);
 			// console.log('imageLinks', book.imageLinks);
 			
 
@@ -33,8 +44,8 @@
 			if (book.imageLinks){
 				div += '<img src="' + book["imageLinks"]["smallThumbnail"] + '">';
 			} //some books have a link to an image but it's just a white block, so decided not to display anything if the book has no imagelink
-			div += '</div>'; // col-sm-2
-			div += '<div class="col-sm-9">';
+			div += '</div>'; // col-sm-3
+			div += '<div class="col-sm-9 book-details">';
 			div += '<p class="book-title">' + book.title + '</p>';
 			if (book.authors){
 				book.authors.map(authorsFun);
@@ -44,7 +55,8 @@
 			if (book.pageCount){
 				div += '<p>' + book.pageCount + ' pages</p>';
 			}
-			div += '</div>'; //col-sm-10
+			div += '<p>' + bookId + '</p>';
+			div += '</div>'; //col-sm-9
 			div += '</div>'; // row
 			div += '</div>'; //book
 			console.log(div);
