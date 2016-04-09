@@ -11,12 +11,15 @@ li span
 #search-button
 {
     cursor: pointer;
+    background-color: #febd69;
+    color: #333;
 }
 
 .book {
 	border-top: thin solid #ddd;
 	padding-top: 1rem;
 	margin-bottom: 1rem;
+	font-size: 1.2rem;
 }
 
 .book-title {
@@ -27,3 +30,45 @@ li span
 .book-details {
 	margin-left: -1rem;
 }
+
+.add-button {
+	margin-top: -0.1rem;
+	margin-bottom: 0.9rem;
+}
+
+p {
+	line-height: 70%
+}
+
+p.book-title, p.authors {
+	line-height: 100%;
+}
+
+
+img {
+	max-height: 17rem;
+}
+
+@media screen and (max-width:767px){
+	p.book-title {
+		margin-top: 1rem;
+	}
+}
+
+.navigation-bar {
+	background-color: #232f3e;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
+	color: #fff;
+}
+
+#add-books-link {
+	color: black;
+}
+
+#twitter-logo{
+	color: #1da1f2;
+	font-size: 1.5em;
+}
+
