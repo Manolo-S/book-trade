@@ -4,6 +4,8 @@
 	var authors;
 	var book;
 	var bookId;
+	var imageLink;
+	var userId = 12345; // placeholder for now, will later be used for twitter or facebook userid
 
 	function authorsFun(author, index) {
 		if (index === book.authors.length - 1) {
@@ -27,6 +29,7 @@
 			// in production code, item.text should have the HTML entities escaped.
 			authors = '';
 			book = item.volumeInfo;
+			var lang = languageCodes[book.language];
 			var bookIdArr = book.industryIdentifiers;
 			if (bookIdArr.length === 1){ //pre-isbn era books can have a non-ISBN identifier e.g. OSU
 				bookId = bookIdArr[0].identifier; 
@@ -38,7 +41,10 @@
 			div += '<div class="col-sm-3">';
 			if (book.imageLinks){
 				div += '<img src="' + book["imageLinks"]["smallThumbnail"] + '">';
-			} //some books have a link to an image but it's just a white block, so decided not to display anything if the book has no imagelink
+				imageLink = book["imageLinks"]["smallThumbnail"];
+			} else {
+				imageLink = 'no-image'; //some books have a link to an image but it's just a white block, so decided not to display anything if the book has no imagelink
+			}	
 			div += '</div>'; // col-sm-3
 			div += '<div class="col-sm-9 book-details">';
 			div += '<p class="book-title">' + book.title + ' ' + '</p>';
@@ -51,15 +57,24 @@
 			if (book.pageCount){
 				div += '<p>' + book.pageCount + ' pages</p>';
 			}
-			div += '<p>' + 'Language: ' + languageCodes[book.language] + '</p>';
+			div += '<p>' + 'Language: ' + lang + '</p>';
 			div += '<p>' + bookId + '</p>';
+			div += '<span>{user: "' + userId + '", image: "' + imageLink + '", title: "' + book.title;
+			div += '", authors: "' + authors + '", publishedDate: "' + book.publishedDate;
+			div += '", pages: "' + book.pageCount + '", language: "' + lang + '", industryIdentifier: "' + bookId + '"}</span>';
 			div += '</div>'; //col-sm-9
 			div += '</div>'; // row
 			div += '</div>'; //book
 			console.log(div);
 			$('#content').append(div);
 		}
+		$('.add-button').click(function(e){
+			var target = $(e.target);
+			var bookObj = target.siblings('span').text();
+			console.log(bookObj);
+		});
 	}
+	
 	function findBook() {
 		var searchStr = $('#search-box').val();
 		var searchURL = encodeURI('https://www.googleapis.com/books/v1/volumes?q=' + searchStr);
@@ -77,9 +92,9 @@
 		}
 	});
 
-	$('.add-button').click(function(){
+	
 
-	});
+	
 
 
 	var languageCodes = {
