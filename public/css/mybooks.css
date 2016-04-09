@@ -63,6 +63,10 @@ img {
 	color: #fff;
 }
 
+.navbar .navbar-nav{
+	padding-top: 0.1rem;
+}
+
 #add-books-link {
 	color: black;
 }
@@ -71,4 +75,11 @@ img {
 	color: #1da1f2;
 	font-size: 1.5em;
 }
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+	padding-bottom: 1.7rem;
+}
+
+
+
 
