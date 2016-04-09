@@ -1,0 +1,10 @@
+.book {
+	border-top: thin solid black;
+	padding-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+.book-title {
+	font-size: 1.8rem;
+	color: #000033;
+}

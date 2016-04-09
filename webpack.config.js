@@ -6,7 +6,7 @@ module.exports = {
 	entry: {
 		index: './index.js',
 		mybooks: './mybooks.js',
-		mybooks2: './mybooks-2.js'
+		mybooks2: './mybooks2.js'
 	},
 	output: {
 		path: path.resolve('build/js'),

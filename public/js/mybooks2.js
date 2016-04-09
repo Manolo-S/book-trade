@@ -1,6 +1,8 @@
 'use strict';
 
 (function bookListFun() {
+	require('../css/mybooks2.css');
+	
 	var authors;
 	var book;
 
@@ -15,28 +17,38 @@
 
 	function handleResponse(response) {
 		// console.log(response.items[0].volumeInfo);
+		$('#content').empty();
 		for (var i = 0; i < response.items.length; i++) {
 			var item = response.items[i];
 			// in production code, item.text should have the HTML entities escaped.
 			authors = "";
 			book = item.volumeInfo;
-			console.log('book', book);
-			console.log('imageLinks', book.imageLinks);
-			book.authors.map(authorsFun);
+			// console.log('book', book);
+			// console.log('imageLinks', book.imageLinks);
+			
+
 			var div = '<div class="book">';
 			div += '<div class="row">';
-			div += '<div class="col-sm-2">';
-			// div += '<img src="' + book["imageLinks"]["smallThumbnail"] + '"">';
+			div += '<div class="col-sm-3">';
+			if (book.imageLinks){
+				div += '<img src="' + book["imageLinks"]["smallThumbnail"] + '">';
+			} //some books have a link to an image but it's just a white block, so decided not to display anything if the book has no imagelink
 			div += '</div>'; // col-sm-2
-			div += '<div class="col-sm-10">';
+			div += '<div class="col-sm-9">';
 			div += '<p class="book-title">' + book.title + '</p>';
-			div += '<span>' + book.publishedDate + '</span>';
-			div += '<p>by ' + authors + '</p>';
-			div += '<p>' + book.pageCount + ' pages</p>';
+			if (book.authors){
+				book.authors.map(authorsFun);
+				div += '<p>by ' + authors + '</p>';
+			}
+			div += '<p>' + book.publishedDate + '</p>';
+			if (book.pageCount){
+				div += '<p>' + book.pageCount + ' pages</p>';
+			}
 			div += '</div>'; //col-sm-10
 			div += '</div>'; // row
 			div += '</div>'; //book
-			$('#search-results').html(div);
+			console.log(div);
+			$('#content').append(div);
 		}
 	}
 
