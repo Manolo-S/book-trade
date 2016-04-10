@@ -29,14 +29,17 @@
 			// in production code, item.text should have the HTML entities escaped.
 			authors = '';
 			book = item.volumeInfo;
+			console.log('book:', book);
 			var lang = languageCodes[book.language];
 			var bookIdArr = book.industryIdentifiers;
-			if (bookIdArr.length === 1){ //pre-isbn era books can have a non-ISBN identifier e.g. OSU
+			if (bookIdArr && bookIdArr.length === 1){ // pre-isbn era books can have a non-ISBN identifier e.g. OSU 
 				bookId = bookIdArr[0].identifier; 
-			} else {
-				bookIdArr.map(isbn13Fun);
-			}
-			var div = '<div class="book">';
+			} else if (bookIdArr){        //if a book has more than one identifier it has a isbn10 and a isbn13 number, 
+				bookIdArr.map(isbn13Fun); //every pre 2007 === (pre isbn13) book that has an isbn10 number also has an isbn13 number 
+			}                             //beginning with 978 so we only use the isbn 13 number in this case
+			// var bookId = (bookIdArr === undefined ? 'no id' : bookId); //some books have no industry identifier;
+
+			var div = '<div class="book">'; //start format book display
 			div += '<div class="row">';
 			div += '<div class="col-sm-3">';
 			if (book.imageLinks){
@@ -64,17 +67,19 @@
 			div += '", pages: "' + book.pageCount + '", language: "' + lang + '", industryIdentifier: "' + bookId + '"}</span>';
 			div += '</div>'; //col-sm-9
 			div += '</div>'; // row
-			div += '</div>'; //book
+			div += '</div>'; //end format book display
 			console.log(div);
 			$('#content').append(div);
 		}
+
 		$('.add-button').click(function(e){
 			var target = $(e.target);
 			var bookObj = target.siblings('span').text();
 			console.log(bookObj);
 		});
 	}
-	
+
+
 	function findBook() {
 		var searchStr = $('#search-box').val();
 		var searchURL = encodeURI('https://www.googleapis.com/books/v1/volumes?q=' + searchStr);
@@ -91,11 +96,6 @@
 			findBook();
 		}
 	});
-
-	
-
-	
-
 
 	var languageCodes = {
 		ab: 'Abkhaz ',
