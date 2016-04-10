@@ -8,7 +8,8 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 
 var index = require('./routes/index');
-var mybooks = require('./routes/mybooks');
+var addNewBook = require('./routes/add-new-book');
+var addBooks = require('./routes/addbooks');
 // var auth = require('./routes/auth');
 
 var app = express();
@@ -22,7 +23,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
-app.use('/mybooks', mybooks);
+app.use('/addbooks', addBooks);
+app.use('/add-new-book', addNewBook);
 
 app.use(logger('dev'));
 
@@ -76,7 +78,7 @@ app.use(function(err, req, res, next) {
 	});
 });
 
-app.set('port', process.env.PORT || 8000);
+app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
 	console.log('Express server listening on port ' + server.address().port);
