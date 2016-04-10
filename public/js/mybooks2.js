@@ -5,7 +5,7 @@
 	var book;
 	var bookId;
 	var imageLink;
-	var userId = 12345; // placeholder for now, will later be used for twitter or facebook userid
+	var user = ['twitter', '12345', 'Jan']; // placeholder for now, will later be used for twitter or facebook userid
 
 	function authorsFun(author, index) {
 		if (index === book.authors.length - 1) {
@@ -37,7 +37,7 @@
 			} else if (bookIdArr){        //if a book has more than one identifier it has a isbn10 and a isbn13 number, 
 				bookIdArr.map(isbn13Fun); //every pre 2007 === (pre isbn13) book that has an isbn10 number also has an isbn13 number 
 			}                             //beginning with 978 so we only use the isbn 13 number in this case
-			// var bookId = (bookIdArr === undefined ? 'no id' : bookId); //some books have no industry identifier;
+			bookId = (bookIdArr === undefined ? '' : bookId); //some books have no industry identifier;
 
 			var div = '<div class="book">'; //start format book display
 			div += '<div class="row">';
@@ -62,7 +62,7 @@
 			}
 			div += '<p>' + 'Language: ' + lang + '</p>';
 			div += '<p>' + bookId + '</p>';
-			div += '<span>{user: "' + userId + '", image: "' + imageLink + '", title: "' + book.title;
+			div += '<span>{owner: "' + user + '", image: "' + imageLink + '", title: "' + book.title;
 			div += '", authors: "' + authors + '", publishedDate: "' + book.publishedDate;
 			div += '", pages: "' + book.pageCount + '", language: "' + lang + '", industryIdentifier: "' + bookId + '"}</span>';
 			div += '</div>'; //col-sm-9
