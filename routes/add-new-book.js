@@ -3,45 +3,38 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var bookModel = require('../config/book-model');
-var booksArray;
+var bookArr;
 var user;
-var requests = [];  //TODO make empty request array
+var requests = [];  
+var dbURI = 'mongodb://localhost/bookswap';
 
 
-// router.use('/', function(req, res, next){
-// 	if (mongoose.connection.readyState === 0){
-// 		var db = mongoose.connect('mongodb://piet:snot@ds021000.mlab.com:21000/bookswap');
-// 	}
-// 		next();
-// 	 });
-// });
 function callback (err, results){
-			if (err) {
-				console.log('error storing book', err) 
-			} else {
-				mongoose.connection.close(function() {
-		            console.log('Mongoose connection disconnected');
-	    		});
-			}
+	if (err) {
+		console.log('error storing book', err) 
+	} else {
+		mongoose.connection.close(function() { //TODO add err object as function parameter??
+	        console.log('disconnected from DB');
+		});
+	}
 } 
 
 function storeBook(err, books){
-	console.log('storebook called');
 	if (err){
 		console.log(err);
-	} else if (books.length === 0){
-		console.log(books)
-		bookModel.create({
-			user: booksArray[0].owner,
-			books: booksArray,
-			requests: requests
-		}, callback);
+		return;
+	}
+
+	if (books.length === 0){
+		console.log(books);
+		bookModel.create({user: user, books: bookArr, requests: requests}, callback);
+	} else {
+		bookModel.update({user: user}, {$push: {books: bookArr[0]}}, callback);
 	}
 }
 
-function findBook(){
-	console.log('findbook called');
-	var db = mongoose.connect('mongodb://localhost/bookswap', function(err){
+function findUser(){
+	var db = mongoose.connect(dbURI, function(err){
 		if (err){
 			console.log(err);
 		} else {
@@ -52,27 +45,11 @@ function findBook(){
 
 
 router.post('/', function(req, res){
-	booksArray = req.body.data;
-	user = booksArray[0].owner;
-	console.log(booksArray);
-	findBook();
-	// console.log('booksArray', booksArray);
+	bookArr = req.body.data;
+	user = bookArr[0].owner;
+	findUser();
 });
 
 module.exports = router;
 
 
-
-
-// picModel.create({
-// 		pics: allPics
-// 	}, function(err, pics){
-// 			if (err) {
-// 				console.log('error storing pics array', err) 
-// 			} else {
-// 				mongoose.connection.close(function() {
-// 		            console.log('Mongoose connection disconnected');
-// 	    		});
-// 			}
-// 	   } 
-//  	);

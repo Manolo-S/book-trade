@@ -10,13 +10,13 @@ var mongoose = require('mongoose');
 var index = require('./routes/index');
 var addNewBook = require('./routes/add-new-book');
 var addBooks = require('./routes/addbooks');
+var myBooks = require('./routes/mybooks');
+var getMyBooks = require('./routes/getmybooks');
 // var auth = require('./routes/auth');
 
 var app = express();
 // var db = mongoose.connect('mongodb://piet:snot@ds047722.mlab.com:47722/pic-wall')
-
 app.use(bodyParser.urlencoded({extended:true}));
-
 
 // require('./config/passport')(app);
 app.set('views', path.join(__dirname, 'views'));
@@ -25,6 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/addbooks', addBooks);
 app.use('/add-new-book', addNewBook);
+app.use('/mybooks', myBooks);
+app.use('/getmybooks', getMyBooks);
 
 app.use(logger('dev'));
 
