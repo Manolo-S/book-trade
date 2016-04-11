@@ -1,16 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
-var UserIDSchema = new Schema({
-	socialMedia: String,
-	userId: String,
-	userName: String,
-	_id: false
-});
-
 var BookSchema = new Schema({
-	owner: UserIDSchema,
+	owner: String,
 	image: String,
 	title: String,
 	authors: String,
@@ -18,7 +10,7 @@ var BookSchema = new Schema({
 	pages: String,
 	language: String,
 	bookid: String,
-	requestedBy: String
+	requestedBy: String,
 	_id: false
 });
 
@@ -36,8 +28,9 @@ var BookSchema = new Schema({
 
 
 var UserSchema = new Schema({
-	user: UserIDSchema,
+	user: String,
 	books: [BookSchema],
 	requests: [BookSchema]
 });
 
+module.exports = mongoose.model('users', UserSchema);
