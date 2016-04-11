@@ -19,7 +19,7 @@ router.use('/', function(req, res, next){
 		if (err){
 			console.log(err);
 			return;
-		} else {
+		} else if (results.length !== 0){
 			books = results[0].books;
 			console.log('books', books);
 
@@ -33,7 +33,9 @@ router.use('/', function(req, res, next){
 
 router.post('/', function(req, res){
 	console.log('end of getmybooks route');
-	res.json(books);
+	if (books){
+		res.json(books);
+	}
 });
 
 

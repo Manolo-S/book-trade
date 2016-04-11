@@ -26,7 +26,6 @@ function storeBook(err, books){
 	}
 
 	if (books.length === 0){
-		console.log(books);
 		bookModel.create({user: user, books: bookArr, requests: requests}, callback);
 	} else {
 		bookModel.update({user: user}, {$push: {books: bookArr[0]}}, callback);
@@ -34,13 +33,15 @@ function storeBook(err, books){
 }
 
 function findUser(){
-	var db = mongoose.connect(dbURI, function(err){
-		if (err){
-			console.log(err);
-		} else {
-			bookModel.find({user: user}, storeBook);
-		}
-	});
+	if (mongoose.connection.readyState === 0){
+		var db = mongoose.connect(dbURI, function(err){
+			if (err){
+				console.log(err);
+			} else {
+				bookModel.find({user: user}, storeBook);
+			}
+		});
+	}
 }
 
 

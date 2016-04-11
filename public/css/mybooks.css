@@ -31,7 +31,7 @@ li span
 	margin-left: -1rem;
 }
 
-.add-button {
+.add-button, .delete-button {
 	margin-top: -0.1rem;
 	margin-bottom: 0.9rem;
 }
