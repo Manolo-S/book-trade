@@ -62,11 +62,10 @@
 			div += '<p>' + bookId + '</p>';
 			div += '<span>{"owner": "' + user + '", "image": "' + imageLink + '", "title": "' + book.title;
 			div += '", "authors": "' + authors + '", "publishedDate": "' + book.publishedDate;
-			div += '", "pages": "' + book.pageCount + '", "language": "' + lang + '", "industryIdentifier": "' + bookId + '", "requestedBy": "testuser"}</span>';
+			div += '", "pages": "' + book.pageCount + '", "language": "' + lang + '", "industryIdentifier": "' + bookId + '", "requestedBy": ""}</span>';
 			div += '</div>'; //col-sm-9
 			div += '</div>'; // row
 			div += '</div>'; //end format book display
-			console.log(div);
 			$('#content').append(div);
 		}
 
