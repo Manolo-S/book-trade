@@ -41,6 +41,8 @@ function findUser(){
 				bookModel.find({user: user}, storeBook);
 			}
 		});
+	} else {
+		bookModel.find({user: user}, storeBook);
 	}
 }
 

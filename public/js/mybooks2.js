@@ -35,6 +35,7 @@
 		$('.delete-button').click(function(e){
 			var target = $(e.target);
 			var industryIdentifier = target.siblings('#industryIdentifier').text();
+			target.parents('.book').remove();
 			console.log(industryIdentifier);
 			$.post('http://localhost:3000/remove-book', {'industryIdentifier': industryIdentifier});
 		});
