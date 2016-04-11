@@ -62,7 +62,7 @@
 			div += '<p>' + bookId + '</p>';
 			div += '<span>{"owner": "' + user + '", "image": "' + imageLink + '", "title": "' + book.title;
 			div += '", "authors": "' + authors + '", "publishedDate": "' + book.publishedDate;
-			div += '", "pages": "' + book.pageCount + '", "language": "' + lang + '", "industryIdentifier": "' + bookId + '"}</span>';
+			div += '", "pages": "' + book.pageCount + '", "language": "' + lang + '", "industryIdentifier": "' + bookId + '", "requestedBy": "testuser"}</span>';
 			div += '</div>'; //col-sm-9
 			div += '</div>'; // row
 			div += '</div>'; //end format book display
@@ -75,7 +75,6 @@
 			var bookObj = JSON.parse(target.siblings('span').text());
 			console.log(bookObj);
 			$.post('http://localhost:3000/add-new-book', {data: [bookObj]});
-			console.log(bookObj);
 		});
 	}
 

@@ -9,7 +9,7 @@ var BookSchema = new Schema({
 	publishedDate: String,
 	pages: String,
 	language: String,
-	bookid: String,
+	industryIdentifier: String,
 	requestedBy: String,
 	_id: false
 });
@@ -29,8 +29,7 @@ var BookSchema = new Schema({
 
 var UserSchema = new Schema({
 	user: String,
-	books: [BookSchema],
-	requests: [BookSchema]
+	books: [BookSchema]
 });
 
 module.exports = mongoose.model('users', UserSchema);
