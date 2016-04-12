@@ -1,22 +1,25 @@
 'use strict';
 
 (function(){
-	var user = 'twitter,12345,Jan';  //TODO: change to store userid string after setting login via twitter/facebook
-	
+	var user = 'facebook,6789,Piet';  //TODO: change to store userid string after setting login via twitter/facebook
+	store.set('user', user);
+
 	function displayBooks(booksArr){
 		console.log('data', booksArr);
+		$('#content').empty();
+
 		for (var i = 0; i < booksArr.length; i++) {
 			var book = booksArr[i];
 			var div = '<div class="book">'; //start format book display
 			div += '<div class="row">';
 			div += '<div class="col-sm-3">';
-			if (book.image){
+			if (book.image && book.image !== 'no-image'){
 				div += '<img src="' + book.image + '">';
 			}	
 			div += '</div>'; // col-sm-3
 			div += '<div class="col-sm-9 book-details">';
 			div += '<p class="book-title">' + book.title + ' ' + '</p>';
-			div += '<button type="button" class="btn btn-danger btn-xs delete-button">Delete book</button>';
+			div += '<button type="button" class="btn btn-danger btn-xs delete-button">Remove book</button>';
 			if (book.authors){
 				div += '<p class="authors">by ' + book.authors + '</p>';
 			}
@@ -40,8 +43,7 @@
 			$.post('http://localhost:3000/remove-book', {'industryIdentifier': industryIdentifier});
 		});
 	}
-
-	store.set('user', user);
+	
 	$.post('http://localhost:3000/get-my-books', {'user': user}, displayBooks);
 
 })();

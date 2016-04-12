@@ -7,7 +7,8 @@ var bookArr;
 var user;
 var requests = [];  
 var dbURI = 'mongodb://localhost/bookswap';
-
+var timestamp;
+var bookInDb;
 
 function callback (err, results){
 	if (err) {
@@ -19,6 +20,14 @@ function callback (err, results){
 	}
 } 
 
+function checkTimeStamp(book){
+	if (book.timestamp === timestamp){
+		console.log("book already in DB", book);
+		bookInDb = true;
+	}
+}
+
+
 function storeBook(err, books){
 	if (err){
 		console.log(err);
@@ -28,7 +37,12 @@ function storeBook(err, books){
 	if (books.length === 0){
 		bookModel.create({user: user, books: bookArr, requests: requests}, callback);
 	} else {
-		bookModel.update({user: user}, {$push: {books: bookArr[0]}}, callback);
+		bookInDb = false;
+        books[0].books.map(checkTimeStamp);
+
+        if (bookInDb === false){
+			bookModel.update({user: user}, {$push: {books: bookArr[0]}}, callback);
+		}
 	}
 }
 
@@ -50,6 +64,7 @@ function findUser(){
 router.post('/', function(req, res){
 	bookArr = req.body.data;
 	user = bookArr[0].owner;
+	timestamp = bookArr[0].timestamp;
 	findUser();
 });
 

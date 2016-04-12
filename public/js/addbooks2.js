@@ -5,7 +5,7 @@
 	var book;
 	var bookId;
 	var imageLink;
-	var user = ['twitter', '12345', 'Jan']; // placeholder for now, will later be used for twitter or facebook userid
+	var user = store.get('user');                        //['twitter', '12345', 'Jan']; // placeholder for now, will later be used for twitter or facebook userid
 	function authorsFun(author, index) {
 		if (index === book.authors.length - 1) {
 			authors += author;
@@ -19,6 +19,11 @@
 			bookId = 'ISBN-13: ' + identifier.identifier;
 		}
 	}
+
+	// function success(){
+
+	// }
+
 
 
 	function handleResponse(response) {
@@ -62,7 +67,7 @@
 			div += '<p>' + bookId + '</p>';
 			div += '<span>{"owner": "' + user + '", "image": "' + imageLink + '", "title": "' + book.title;
 			div += '", "authors": "' + authors + '", "publishedDate": "' + book.publishedDate;
-			div += '", "pages": "' + book.pageCount + '", "language": "' + lang + '", "industryIdentifier": "' + bookId + '", "requestedBy": ""}</span>';
+			div += '", "pages": "' + book.pageCount + '", "language": "' + lang + '", "industryIdentifier": "' + bookId + '", "requestedBy": "", "timestamp": ' + Date.now() + '}</span>';
 			div += '</div>'; //col-sm-9
 			div += '</div>'; // row
 			div += '</div>'; //end format book display
