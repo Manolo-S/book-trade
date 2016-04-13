@@ -21,7 +21,6 @@ router.use('/', function(req, res, next){
 			return;
 		} else if (results.length !== 0){
 			books = results[0].books;
-			console.log('books', books);
 
 		mongoose.connection.close(function(){
 			console.log('Mongoose connection disconnected');
@@ -32,7 +31,6 @@ router.use('/', function(req, res, next){
 });
 
 router.post('/', function(req, res){
-	console.log('end of getmybooks route');
 	if (books){
 		res.json(books);
 	}

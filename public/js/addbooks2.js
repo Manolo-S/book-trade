@@ -20,12 +20,6 @@
 		}
 	}
 
-	// function success(){
-
-	// }
-
-
-
 	function handleResponse(response) {
 		$('#content').empty();
 		for (var i = 0; i < response.items.length; i++) {
@@ -33,7 +27,7 @@
 			// in production code, item.text should have the HTML entities escaped.
 			authors = '';
 			book = item.volumeInfo;
-			console.log('book:', book);
+			// console.log('book:', book);
 			var lang = languageCodes[book.language];
 			var bookIdArr = book.industryIdentifiers;
 			if (bookIdArr && bookIdArr.length === 1){ // pre-isbn era books can have a non-ISBN identifier e.g. OSU 
@@ -77,7 +71,7 @@
 		$('.add-button').click(function(e){
 			var target = $(e.target);
 			var bookObj = JSON.parse(target.siblings('span').text());
-			console.log(bookObj);
+			// console.log(bookObj);
 			$.post('http://localhost:3000/add-new-book', {data: [bookObj]});
 		});
 	}

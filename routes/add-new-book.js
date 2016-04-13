@@ -21,6 +21,7 @@ function callback (err, results){
 } 
 
 function checkTimeStamp(book){
+	console.log('checkTimeStamp called', book.timestamp, timestamp);
 	if (book.timestamp === timestamp){
 		console.log("book already in DB", book);
 		bookInDb = true;

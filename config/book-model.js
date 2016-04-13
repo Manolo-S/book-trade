@@ -11,7 +11,7 @@ var BookSchema = new Schema({
 	language: String,
 	industryIdentifier: String,
 	requestedBy: String,
-	timestamp: Number,
+	timestamp: String,
 	_id: false
 });
 
