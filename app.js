@@ -14,6 +14,7 @@ var myBooks = require('./routes/mybooks');
 var getMyBooks = require('./routes/getmybooks');
 var getAllBooks =require('./routes/getallbooks');
 var removeBook = require('./routes/remove-book');
+var requestBook = require('./routes/request-book');
 // var auth = require('./routes/auth');
 
 var app = express();
@@ -31,6 +32,7 @@ app.use('/mybooks', myBooks);
 app.use('/get-my-books', getMyBooks);
 app.use('/get-all-books', getAllBooks);
 app.use('/remove-book', removeBook);
+app.use('/request-book', requestBook);
 
 app.use(logger('dev'));
 
