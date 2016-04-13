@@ -1,7 +1,7 @@
 'use strict';
 
 (function(){
-	var user = 'facebook,6789,Piet';  //TODO: change to store userid string after setting login via twitter/facebook
+	var user = 'twitter,1234,Jan';  //TODO: change to store userid string after setting login via twitter/facebook
 	store.set('user', user);
 
 	function displayBooks(booksArr){
@@ -32,14 +32,12 @@
 			div += '</div>'; //col-sm-9
 			div += '</div>'; // row
 			div += '</div>'; //end format book display
-			console.log(div);
 			$('#content').append(div);
 		}
 		$('.delete-button').click(function(e){
 			var target = $(e.target);
 			var industryIdentifier = target.siblings('#industryIdentifier').text();
 			target.parents('.book').remove();
-			console.log(industryIdentifier);
 			$.post('http://localhost:3000/remove-book', {'industryIdentifier': industryIdentifier});
 		});
 	}

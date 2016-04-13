@@ -20,8 +20,8 @@ function callback (err, results){
 	}
 } 
 
-function checkTimeStamp(book){
-	console.log('checkTimeStamp called', book.timestamp, timestamp);
+function checkTimeStamp(book){ //  $.post in addbook2.js repeatedly posted the same book if you wait a little, this function checks when the book was first added so repeat submits
+	console.log('checkTimeStamp called', book.timestamp, timestamp); //will have the same timestamp and will not be entered into the DB
 	if (book.timestamp === timestamp){
 		console.log("book already in DB", book);
 		bookInDb = true;
@@ -40,7 +40,6 @@ function storeBook(err, books){
 	} else {
 		bookInDb = false;
         books[0].books.map(checkTimeStamp);
-
         if (bookInDb === false){
 			bookModel.update({user: user}, {$push: {books: bookArr[0]}}, callback);
 		}
@@ -63,6 +62,10 @@ function findUser(){
 
 
 router.post('/', function(req, res){
+	if (req.body){
+		res.sendStatus(200);
+	}
+
 	bookArr = req.body.data;
 	user = bookArr[0].owner;
 	timestamp = bookArr[0].timestamp;
