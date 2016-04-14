@@ -12,7 +12,6 @@ function callback (err, results){
 	if (err) {
 		console.log('error removing book', err) 
 	} else {
-		console.log(results);
 		mongoose.connection.close(function() { //TODO add err object as function parameter??
 	        console.log('disconnected from DB');
 		});
@@ -20,14 +19,15 @@ function callback (err, results){
 } 
 
 router.post('/', function(req, res){
+	if (req.body){
+		res.sendStatus(200);
+	}
 	var industryIdentifier = req.body.industryIdentifier;
 	var timestamp = req.body.timestamp;
 	user = req.body.user;
-	console.log(user, typeof(industryIdentifier), typeof(timestamp));
 	if (mongoose.connection.readyState === 0){
 		var db = mongoose.connect('mongodb://localhost/bookswap');
 	}
-	console.log('try removing the book');
 	bookModel.update({'user': user}, {$pull: {books: {'industryIdentifier': industryIdentifier, 'timestamp': timestamp}}}, callback);
 });
 
