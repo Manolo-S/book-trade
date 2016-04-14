@@ -21,13 +21,14 @@ function callback (err, results){
 
 router.post('/', function(req, res){
 	var industryIdentifier = req.body.industryIdentifier;
-	var db = mongoose.connect(dbURI, function(err){
-		if (err){
-			console.log(err);
-		} else {
-			bookModel.remove({books: {$elemMatch: {industryIdentifier: industryIdentifier}}}, callback);
-		}
-	});
+	var timestamp = req.body.timestamp;
+	user = req.body.user;
+	console.log(user, typeof(industryIdentifier), typeof(timestamp));
+	if (mongoose.connection.readyState === 0){
+		var db = mongoose.connect('mongodb://localhost/bookswap');
+	}
+	console.log('try removing the book');
+	bookModel.update({'user': user}, {$pull: {books: {'industryIdentifier': industryIdentifier, 'timestamp': timestamp}}}, callback);
 });
 
 module.exports = router;

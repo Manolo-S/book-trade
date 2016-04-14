@@ -50,10 +50,9 @@
 
 		$('.request-button').click(function(e){
 			var target = $(e.target);
-			var requestDetails = target.siblings('#request-details').text();
-			console.log(requestDetails);
+			var bookDetails = target.siblings('#request-details').text();
 			target.parents('.book').remove();
-			$.post('http://localhost:3000/request-book', {'requestDetails': requestDetails});
+			$.post('http://localhost:3000/request-book', {'bookRequest': {requestedBy: 'facebook,999,klaas', bookDetails: bookDetails}});
 		});
 	}
 	
