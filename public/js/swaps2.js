@@ -7,18 +7,18 @@ console.log('swaps2 called');
 	var user = store.get('user'); 
 
 	function whoseRequest(results){
+		$('#requests-mine').empty();
+		$('#requests-others').empty();
 		results.bookData.map(displayBooks);
 		console.log(results.bookData);
 	}
 
 	function displayBooks(books, index){
-		console.log('displaybooks called');
-		var whoseRequest = index === 0? '#requests-others' : '#requests-mine';
-		console.log('whoseRequest', whoseRequest);
-		console.log('swaps displayBooks called');
+		console.log('displaybooks called', books);
+		var request = index === 0? '#requests-others' : '#requests-mine';
+		console.log('whoseRequest', request);
 		// console.log('swap2 results', books);
-		$('#requests-mine').empty();
-		$('#requests-others').empty();
+		
 
 		for (var i = 0; i < books.length; i++) {
 			if (books[i].requestedBy === ""){
@@ -51,7 +51,7 @@ console.log('swaps2 called');
 			div += '</div>'; //col-sm-9
 			div += '</div>'; // row
 			div += '</div>'; //end format book display
-			$(whoseRequest).append(div);
+			$(request).append(div);
 		}
 
 		$('.remove-button').click(function(e){
