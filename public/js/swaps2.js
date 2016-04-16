@@ -1,16 +1,31 @@
 'use strict';
+console.log('swaps2 called');
+
 
 (function(){
-	var user = 'facebook,6789,Klaas';  //TODO: change to store userid string after setting login via twitter/facebook
-	// var user = 'twitter,1234,Jan';  //TODO: change to store userid string after setting login via twitter/facebook
-	store.set('user', user);
 
-	function displayBooks(booksArr){
-		console.log('data', booksArr);
-		$('#content').empty();
+	var user = store.get('user'); 
 
-		for (var i = 0; i < booksArr.length; i++) {
-			var book = booksArr[i];
+	function whoseRequest(results){
+		results.bookData.map(displayBooks);
+		console.log(results.bookData);
+	}
+
+	function displayBooks(books, index){
+		console.log('displaybooks called');
+		var whoseRequest = index === 0? '#requests-others' : '#requests-mine';
+		console.log('whoseRequest', whoseRequest);
+		console.log('swaps displayBooks called');
+		// console.log('swap2 results', books);
+		$('#requests-mine').empty();
+		$('#requests-others').empty();
+
+		for (var i = 0; i < books.length; i++) {
+			if (books[i].requestedBy === ""){
+				continue;
+			}
+			var book = books[i];
+			var requestUserName = (book.requestedBy.split(','))[2];
 			var div = '<div class="book">'; //start format book display
 			div += '<div class="row">';
 			div += '<div class="col-sm-3">';
@@ -20,6 +35,7 @@
 			div += '</div>'; // col-sm-3
 			div += '<div class="col-sm-9 book-details">';
 			div += '<p class="book-title">' + book.title + '</p>';
+			div += '<p>Requested by: ' + requestUserName + '</p>';
 			div += '<button type="button" class="btn btn-danger btn-xs remove-button">Remove book</button>';
 			if (book.authors){
 				div += '<p class="authors">by ' + book.authors + '</p>';
@@ -35,8 +51,9 @@
 			div += '</div>'; //col-sm-9
 			div += '</div>'; // row
 			div += '</div>'; //end format book display
-			$('#content').append(div);
+			$(whoseRequest).append(div);
 		}
+
 		$('.remove-button').click(function(e){
 			var target = $(e.target);
 			var industryIdentifier = target.siblings('#industryIdentifier').text();
@@ -46,7 +63,8 @@
 			$.post('http://localhost:3000/remove-book', {'user': user, 'industryIdentifier': industryIdentifier, 'timestamp': timestamp});
 		});
 	}
-	
-	$.post('http://localhost:3000/get-my-books', {'user': user}, displayBooks);
+
+	$.post('http://localhost:3000/requested-books', {'user': user}, whoseRequest);
+
 
 })();

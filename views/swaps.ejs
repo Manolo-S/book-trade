@@ -3,8 +3,8 @@
 	<head>
 		<meta charset='UTF-8'>
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
-		<script src='/build/js/addbooks.js'></script>
-		<title>Add books</title>
+		<script src='/build/js/swaps.js'></script>
+		<title>Swaps</title>
 	</head>
 	<body>
 		<nav class='navbar navbar-default container-fluid navigation-bar'>
@@ -15,14 +15,14 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				</button>
-				<a class='navbar-brand' href='#'>Book Trader</a>
+				<a class='navbar-brand' href='#'>Book Swap</a>
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class='nav navbar-nav navbar-right'>
 					<li><a href='/'>Home</a></li>
 					<li><a href='/mybooks'>My books</a></li>
-					<li class='active'><a href='#' id='add-books-link'>Add books<span class='sr-only'>(current)</span></a></li>
-					<li><a href='/swaps'>Swaps</a></li>
+					<li><a href='/addbooks'>Add books</a></li>
+					<li class='active'><a href='#' id='swaps-link'>Swaps<span class='sr-only'>(current)</span></a></li>
 					<li><a href='/settings'>Settings</a></li>
 					<li>
 						<a class='twitter' id='twitter-a' href='/auth/twitter'><i class=
@@ -31,14 +31,11 @@
 				</ul>
 			</div>
 		</nav>
-		<div class='form-group container'>
-			<div class='input-group'>
-				<input type='text' class='form-control' id='search-box' placeholder='Enter title, author, or ISBN number'>
-				<div class='input-group-addon' id='search-button'>Search</div>
-			</div>
-		</div>
-		<div id='content' class='container'></div>
+		<h1>Requests for my books</h1>
+		<div id='requests-others' class='container'></div>
+		<h1>My requests</h1>
+		<div id='requests-mine' class='container'></div>
 		<script src='/lib/store.min.js'></script>
-		<script src='/build/js/addbooks2.js'></script>
+		<script src='/build/js/swaps2.js'></script>
 	</body>
 </html>

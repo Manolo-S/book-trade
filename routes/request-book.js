@@ -4,30 +4,20 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var bookModel = require('../config/book-model');
 var dbURI = 'mongodb://localhost/bookswap';
+var book;
 var user;
+var owner;
+var image;
+var title;
+var authors;
+var publishedDate;
+var pages;
+var language;
 var industryIdentifier;
 var timestamp;
 var request;
 var requestedBy;
 var bookDetails;
-
-// function callback (err, results){
-// 	if (err) {
-// 		console.log('error storing book', err) 
-// 	} else {
-// 		mongoose.connection.close(function() { //TODO add err object as function parameter??
-// 	        console.log('disconnected from DB');
-// 		});
-// 	}
-// } 
-
-// function checkTimeStamp(book){ //  $.post in addbook2.js repeatedly posted the same book if you wait a little, this function checks when the book was first added so repeat submits
-// 	console.log('checkTimeStamp called', book.timestamp, timestamp); //will have the same timestamp and will not be entered into the DB
-// 	if (book.timestamp === timestamp){
-// 		console.log("book already in DB", book);
-// 		bookInDb = true;
-// 	}
-// }
 
 function callback (err, results){
 	if (err) {
@@ -35,13 +25,22 @@ function callback (err, results){
 		mongoose.connection.close(function() { //TODO add err object as function parameter??
 	        console.log('disconnected from DB');
 		});
-	} else {
-		console.log(results);
-		mongoose.connection.close(function() { //TODO add err object as function parameter??
-	        console.log('disconnected from DB');
-		});
 	}
+	// } else {
+	// 	console.log(results);
+	// 	mongoose.connection.close(function() { //TODO add err object as function parameter??
+	//         console.log('disconnected from DB');
+	// 	});
+	// }
 } 
+
+function callback2(err, results){
+	if (results.length === 0){
+		bookModel.create({user: requestedBy, books: [], requests: [book]});
+	} else {
+		bookModel.update( {user: requestedBy}, {$push: {requests: book}}, callback);		
+	}
+}
 
 function findBook(){
 	if (mongoose.connection.readyState === 0){
@@ -49,14 +48,13 @@ function findBook(){
 			if (err){
 				console.log(err);
 			} else {
-				console.log('findbook called');
 				bookModel.update( {user: user, 'books.industryIdentifier': industryIdentifier, 'books.timestamp': timestamp}, {'$set': {'books.$.requestedBy': requestedBy}}, callback);
+				bookModel.find({user: requestedBy}, callback2);
 			}
 		});
 	} else {
-		console.log('findbook called');
 		bookModel.update({user: user, 'books.industryIdentifier': industryIdentifier, 'books.timestamp': timestamp}, {'$set': {'books.$.requestedBy': requestedBy}}, callback);
-		// bookModel.update({$and: [{user: user}, {books: {$elemMatch: {industryIdentifier: industryIdentifier, timestamp: timestamp}}}]}, {requestedBy: requestedBy}, callback);
+		bookModel.find({user: requestedBy}, callback2);
 	}
 }
 
@@ -66,12 +64,22 @@ router.post('/', function(req, res){
 		res.sendStatus(200);
 	}
 	request = req.body.bookRequest;
-	requestedBy = request.requestedBy;
 	bookDetails = request.bookDetails.split(',');
-	user = bookDetails[0] + ',' + bookDetails[1] + ',' + bookDetails[2];
-	industryIdentifier = bookDetails[3];
-	timestamp = bookDetails[4];
-	console.log('request', requestedBy, user, industryIdentifier, timestamp);
+	user = owner = bookDetails[0] + ',' + bookDetails[1] + ',' + bookDetails[2];
+	image = bookDetails[3];
+	title = bookDetails[4];
+	authors = bookDetails[5]
+	publishedDate = bookDetails[6];
+	pages = bookDetails[7];
+	language = bookDetails[8];
+	industryIdentifier = bookDetails[9];
+	requestedBy = request.requestedBy;
+	timestamp = bookDetails[10];
+	book = {owner: owner, image: image, title: title, authors: authors, publishedDate: publishedDate,
+	            pages: pages, language: language, industryIdentifier: industryIdentifier,
+	        	requestedBy: requestedBy, timestamp: timestamp};
+
+	console.log('book', book);
 	findBook();
 });
 

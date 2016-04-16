@@ -9,7 +9,9 @@ module.exports = {
 		mybooks: './mybooks.js',
 		mybooks2: './mybooks2.js',
 		allbooks: './allbooks.js',
-		allbooks2: './allbooks2.js'
+		allbooks2: './allbooks2.js',
+		swaps: './swaps.js',
+		swaps2: './swaps2.js'
 	},
 	output: {
 		path: path.resolve('build/js'),

@@ -2,9 +2,7 @@
 
 (function(){
 	var owner;
-
-
-	
+	var user = store.get('user');
 
 	function displayBook(book){
 		var industryIdentifier = book.industryIdentifier;
@@ -26,8 +24,10 @@
 			div += '<p>' + book.pages + ' pages</p>';
 		}
 		div += '<p>' + 'Language: ' + book.language + '</p>';
-		div += '<p id="industryIdentifier">' + book.industryIdentifier + '</p>';
-		div += '<span id="request-details">' + book.owner + ',' + book.industryIdentifier + ',' + book.timestamp + '</span>';
+		div += '<p>' + book.industryIdentifier + '</p>';
+		div += '<span class="book-details">' + book.owner + ',' + book.image + ',' + book.title + ',';
+		div +=  book.authors + ',' + book.publishedDate + ',' + book.pages + ',' + book.language + ',';
+		div +=  book.industryIdentifier + ',' + book.timestamp + '</span>';
 		div += '</div>'; //col-sm-9
 		div += '</div>'; // row
 		div += '</div>'; //end format book display
@@ -50,9 +50,9 @@
 
 		$('.request-button').click(function(e){
 			var target = $(e.target);
-			var bookDetails = target.siblings('#request-details').text();
+			var bookDetails = target.siblings('.book-details').text();
 			target.parents('.book').remove();
-			$.post('http://localhost:3000/request-book', {'bookRequest': {requestedBy: 'facebook,999,klaas', bookDetails: bookDetails}});
+			$.post('http://localhost:3000/request-book', {'bookRequest': {requestedBy: user, bookDetails: bookDetails}});
 		});
 	}
 	

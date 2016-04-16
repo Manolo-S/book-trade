@@ -11,6 +11,8 @@ var index = require('./routes/index');
 var addNewBook = require('./routes/add-new-book');
 var addBooks = require('./routes/addbooks');
 var myBooks = require('./routes/mybooks');
+var swaps = require('./routes/swaps');
+var requestedBooks = require('./routes/requested-books');
 var getMyBooks = require('./routes/getmybooks');
 var getAllBooks =require('./routes/getallbooks');
 var removeBook = require('./routes/remove-book');
@@ -33,6 +35,8 @@ app.use('/get-my-books', getMyBooks);
 app.use('/get-all-books', getAllBooks);
 app.use('/remove-book', removeBook);
 app.use('/request-book', requestBook);
+app.use('/swaps', swaps);
+app.use('/requested-books', requestedBooks);
 
 app.use(logger('dev'));
 
