@@ -35,8 +35,10 @@ console.log('swaps2 called');
 			div += '</div>'; // col-sm-3
 			div += '<div class="col-sm-9 book-details">';
 			div += '<p class="book-title">' + book.title + '</p>';
-			div += '<p>Requested by: ' + requestUserName + '</p>';
-			div += '<button type="button" class="btn btn-danger btn-xs remove-button">Remove book</button>';
+			if (request === '#requests-others'){
+				div += '<p>Requested by: ' + requestUserName + '</p>';
+			}
+			div += '<button type="button" class="btn btn-danger btn-xs remove-button">Remove request</button>';
 			if (book.authors){
 				div += '<p class="authors">by ' + book.authors + '</p>';
 			}
@@ -56,11 +58,11 @@ console.log('swaps2 called');
 
 		$('.remove-button').click(function(e){
 			var target = $(e.target);
-			var industryIdentifier = target.siblings('#industryIdentifier').text();
-			var timestamp = target.siblings('#timestamp').text();
-			var user = target.siblings('#user').text();
-			target.parents('.book').remove();
-			$.post('http://localhost:3000/remove-book', {'user': user, 'industryIdentifier': industryIdentifier, 'timestamp': timestamp});
+			// var industryIdentifier = target.siblings('#industryIdentifier').text();
+			// var timestamp = target.siblings('#timestamp').text();
+			// var user = target.siblings('#user').text();
+			// target.parents('.book').remove();
+			$.post('http://localhost:3000/remove-request', {'user': user, 'industryIdentifier': industryIdentifier, 'timestamp': timestamp});
 		});
 	}
 

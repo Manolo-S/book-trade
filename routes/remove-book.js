@@ -11,11 +11,12 @@ var dbURI = 'mongodb://localhost/bookswap';
 function callback (err, results){
 	if (err) {
 		console.log('error removing book', err) 
-	} else {
-		mongoose.connection.close(function() { //TODO add err object as function parameter??
-	        console.log('disconnected from DB');
-		});
 	}
+	// } else {
+	// 	mongoose.connection.close(function() { //TODO add err object as function parameter??
+	//         console.log('disconnected from DB');
+	// 	});
+	// }
 } 
 
 router.post('/', function(req, res){
@@ -23,12 +24,15 @@ router.post('/', function(req, res){
 		res.sendStatus(200);
 	}
 	var industryIdentifier = req.body.industryIdentifier;
+	var requestedBy = req.body.requestedBy;
+	console.log('requestedBy', requestedBy);
 	var timestamp = req.body.timestamp;
 	user = req.body.user;
 	if (mongoose.connection.readyState === 0){
 		var db = mongoose.connect('mongodb://localhost/bookswap');
 	}
-	bookModel.update({'user': user}, {$pull: {books: {'industryIdentifier': industryIdentifier, 'timestamp': timestamp}}}, callback);
+	bookModel.update({user: user}, {$pull: {books: {'industryIdentifier': industryIdentifier, 'timestamp': timestamp}}}, callback);
+	bookModel.update({user: requestedBy}, {$pull: {requests: {industryIdentifier: industryIdentifier, timestamp: timestamp}}}, callback);
 });
 
 module.exports = router;
