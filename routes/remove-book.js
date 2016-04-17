@@ -32,7 +32,9 @@ router.post('/', function(req, res){
 		var db = mongoose.connect('mongodb://localhost/bookswap');
 	}
 	bookModel.update({user: user}, {$pull: {books: {'industryIdentifier': industryIdentifier, 'timestamp': timestamp}}}, callback);
-	bookModel.update({user: requestedBy}, {$pull: {requests: {industryIdentifier: industryIdentifier, timestamp: timestamp}}}, callback);
+	if (requestedBy !== ""){
+		bookModel.update({user: requestedBy}, {$pull: {requests: {industryIdentifier: industryIdentifier, timestamp: timestamp}}}, callback);
+	}
 });
 
 module.exports = router;

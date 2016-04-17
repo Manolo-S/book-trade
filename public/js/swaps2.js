@@ -26,6 +26,7 @@ console.log('swaps2 called');
 			}
 			var book = books[i];
 			var requestUserName = (book.requestedBy.split(','))[2];
+			var bookOwnerName = (book.owner.split(','))[2];
 			var div = '<div class="book">'; //start format book display
 			div += '<div class="row">';
 			div += '<div class="col-sm-3">';
@@ -37,6 +38,8 @@ console.log('swaps2 called');
 			div += '<p class="book-title">' + book.title + '</p>';
 			if (request === '#requests-others') {
 				div += '<p>Requested by: ' + requestUserName + '</p>';
+			} else {
+				div += '<p>Owner: ' + bookOwnerName + '</p>';
 			}
 			div += '<button type="button" class="btn btn-danger btn-xs remove-button">Remove request</button>';
 			if (book.authors) {
