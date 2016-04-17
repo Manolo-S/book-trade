@@ -31,10 +31,15 @@ li span, .request-details
 	margin-left: -1rem;
 }
 
-.add-button, .remove-button, .request-button {
+.add-button, .remove-button, .request-button, .swap-button {
 	margin-top: -0.1rem;
 	margin-bottom: 0.9rem;
 }
+
+.swap-button{
+	margin-top: 5rem;
+}
+
 
 p {
 	line-height: 70%

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		<script src='/lib/store.min.js'></script>
+		<script src='/build/js/requestbook.js'></script>
+		<title>Request book</title>
+	</head>
+	<body>
+		<nav class='navbar navbar-default container-fluid navigation-bar'>
+			<div class='navbar-header'>
+				<!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button> -->
+				<a class='navbar-brand' href='http://localhost:3000'>Book Swap</a>
+			</div>
+			<!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class='nav navbar-nav navbar-right'>
+					<li><a href='/'>Home</a></li>
+					<li class='active'><a href='#' id='my-books-link'>My books<span class='sr-only'>(current)</span></a></li>
+					<li><a href='/addbooks'>Add books</a></li>
+					<li><a href='/swaps'>Swaps</a></li>
+					<li><a href='/settings'>Settings</a></li>
+					<li>
+						<a class='twitter' id='twitter-a' href='/auth/twitter'><i class=
+						'fa fa-twitter' id='twitter-logo'></i></a>
+					</li>
+				</ul>
+			</div> -->
+		</nav>
+		<div id='requested-book' class='container'><h4>Swap:</h4></div>
+		<div id='mybooks' class='container'><h4>For:</h4></div>
+		<div class='container'>
+			<div class='row'>
+			<button type='button' class='btn btn-danger pull-right swap-button' id='close-page'>Close swap page</button>
+			</div>
+		</div>
+		<script src='/build/js/requestbook2.js'></script>
+	</body>
+</html>

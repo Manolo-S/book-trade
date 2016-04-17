@@ -3,6 +3,8 @@
 (function(){
 	var owner;
 	var user = store.get('user');
+	var url = 'http://localhost:3000/request-book';
+	var book;
 
 	function displayBook(book){
 		if (book.requestedBy !== ""){return;}
@@ -26,9 +28,11 @@
 		}
 		div += '<p>' + 'Language: ' + book.language + '</p>';
 		div += '<p>' + book.industryIdentifier + '</p>';
-		div += '<span class="book-details">' + book.owner + ',' + book.image + ',' + book.title + ',';
-		div +=  book.authors + ',' + book.publishedDate + ',' + book.pages + ',' + book.language + ',';
+		div += '<span class="book">' + book.owner + ',' + book.image + ',';
+		div +=  book.publishedDate + ',' + book.pages + ',' + book.language + ',';
 		div +=  book.industryIdentifier + ',' + book.timestamp + '</span>';
+		div += '<span id="title">' + book.title + '</span>';
+		div += '<span id="authors">' + book.authors + '</span>';
 		div += '</div>'; //col-sm-9
 		div += '</div>'; // row
 		div += '</div>'; //end format book display
@@ -39,7 +43,7 @@
 
 	function usersDataFun(results){
 		var usersArr = results.results;
-		console.log(usersArr);
+		// console.log(usersArr);
 
 		$('#content').empty();
 
@@ -51,9 +55,24 @@
 
 		$('.request-button').click(function(e){
 			var target = $(e.target);
-			var bookDetails = target.siblings('.book-details').text();
-			target.parents('.book').remove();
-			$.post('http://localhost:3000/request-book', {'bookRequest': {requestedBy: user, bookDetails: bookDetails}});
+			var title = target.siblings('#title').text();
+			var authors = target.siblings('#authors').text();
+			var book = target.siblings('.book').text();
+			book = book.split(',');
+			var owner = book[0] + ',' + book[1] + ',' + book[2];
+			var image = book[3];
+			var publishedDate = book[4];
+			var pages = book[5];
+			var language = book[6];
+			var industryIdentifier = book[7];
+			var timestamp = book[8];
+			book = {owner: owner, image: image, title: title, authors: authors, publishedDate: publishedDate,
+	            pages: pages, language: language, industryIdentifier: industryIdentifier, timestamp: timestamp};
+	        console.log('book', book);
+			// target.parents('.book').remove();
+			// $.post('http://localhost:3000/request-book', {'bookRequest': {requestedBy: user, bookDetails: bookDetails}});
+			store.set('book', book);
+			window.open(url);
 		});
 	}
 	

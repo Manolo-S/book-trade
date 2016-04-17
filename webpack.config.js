@@ -11,7 +11,9 @@ module.exports = {
 		allbooks: './allbooks.js',
 		allbooks2: './allbooks2.js',
 		swaps: './swaps.js',
-		swaps2: './swaps2.js'
+		swaps2: './swaps2.js',
+		requestbook: './requestbook.js',
+		requestbook2: './requestbook2.js'
 	},
 	output: {
 		path: path.resolve('build/js'),

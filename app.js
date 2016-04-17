@@ -17,8 +17,9 @@ var getMyBooks = require('./routes/getmybooks');
 var getAllBooks =require('./routes/getallbooks');
 var removeBook = require('./routes/remove-book');
 var removeRequest = require('./routes/remove-request');
-var requestBook = require('./routes/request-book');
+var requestBook = require('./routes/requestbook');
 // var auth = require('./routes/auth');
+
 
 var app = express();
 // var db = mongoose.connect('mongodb://piet:snot@ds047722.mlab.com:47722/pic-wall')
