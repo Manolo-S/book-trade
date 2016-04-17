@@ -18,6 +18,7 @@ var getAllBooks =require('./routes/getallbooks');
 var removeBook = require('./routes/remove-book');
 var removeRequest = require('./routes/remove-request');
 var requestBook = require('./routes/requestbook');
+var requestSwap = require('./routes/requestswap');
 // var auth = require('./routes/auth');
 
 
@@ -40,6 +41,7 @@ app.use('/request-book', requestBook);
 app.use('/swaps', swaps);
 app.use('/requested-books', requestedBooks);
 app.use('/remove-request', removeRequest);
+app.use('/request-swap', requestSwap);
 
 app.use(logger('dev'));
 

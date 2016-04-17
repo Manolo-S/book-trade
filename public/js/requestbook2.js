@@ -71,7 +71,7 @@
 		}
 	}
 
-	$('.swap-button').click(function(){window.close()});
+	$('.close-button').click(function(){window.close()});
 
 	$.post('http://localhost:3000/get-my-books', {'user': user}, displayBooks);
 
