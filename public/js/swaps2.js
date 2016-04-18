@@ -28,16 +28,17 @@ console.log('swaps2 called');
 			console.log(swapArr[i]);
 			var book = swapArr[i];
 			var userName = (book.owner.split(','))[2];
-			if (i === 0 && user === userName){
-				var div = '<h4>Swap:</h4>';
+			var div = '<div class="swap">'
+			if (i === 0 && user === book.owner){
+				div += '<h4>I\'ll swap:</h4>';
 			} 
 
-			if (i === 0 && user!== userName) {
-				var div = '<h4>User ' + userName + ' would like to swap:</h4>';
+			if (i === 0 && user!== book.owner) {
+				div += '<h4>User ' + userName + ' would like to swap:</h4>';
 			}
 
 			if (i === 1){
-				var div = '<h4>For:</h4>';
+				div += '<h4>For:</h4>';
 			}
 
 			div += '<div class="book">'; //start format book display
@@ -66,6 +67,9 @@ console.log('swaps2 called');
 			div += '</div>'; //col-sm-9
 			div += '</div>'; // row
 			div += '</div>'; //end format book display
+			if (i === 1){
+				div += '</div>'///end swap
+			}
 			console.log(div);
 			$(request).append(div);
 		}
