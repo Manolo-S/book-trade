@@ -7,27 +7,40 @@ console.log('swaps2 called');
 	var user = store.get('user');
 
 	function whoseRequest(results) {
+		// console.log('whoserequest', results);
+		var requests = results.requests;
 		$('#requests-mine').empty();
 		$('#requests-others').empty();
-		results.bookData.map(displayBooks);
-		console.log(results.bookData);
+		requests.map(displaySwap);
 	}
 
-	function displayBooks(books, index) {
-		console.log('displaybooks called', books);
-		var request = index === 0 ? '#requests-others' : '#requests-mine';
-		console.log('whoseRequest', request);
-		// console.log('swap2 results', books);
+
+	function displaySwap(swap) {
+		console.log('displaybooks called');
+		// console.log(swap.offeredBook.owner, user);
+		var request = swap.offeredBook.owner === user ? '#requests-mine' : '#requests-others';
+		// console.log(request);
+		var swapArr = [swap.offeredBook, swap.requestedBook];
+		// console.log(swapArr);
 
 
-		for (var i = 0; i < books.length; i++) {
-			if (books[i].requestedBy === "") {
-				continue;
+		for (var i = 0; i < swapArr.length; i++) {
+			console.log(swapArr[i]);
+			var book = swapArr[i];
+			var userName = (book.owner.split(','))[2];
+			if (i === 0 && user === userName){
+				var div = '<h4>Swap:</h4>';
+			} 
+
+			if (i === 0 && user!== userName) {
+				var div = '<h4>User ' + userName + ' would like to swap:</h4>';
 			}
-			var book = books[i];
-			var requestUserName = (book.requestedBy.split(','))[2];
-			var bookOwnerName = (book.owner.split(','))[2];
-			var div = '<div class="book">'; //start format book display
+
+			if (i === 1){
+				var div = '<h4>For:</h4>';
+			}
+
+			div += '<div class="book">'; //start format book display
 			div += '<div class="row">';
 			div += '<div class="col-sm-3">';
 			if (book.image && book.image !== 'no-image') {
@@ -36,11 +49,6 @@ console.log('swaps2 called');
 			div += '</div>'; // col-sm-3
 			div += '<div class="col-sm-9 book-details">';
 			div += '<p class="book-title">' + book.title + '</p>';
-			if (request === '#requests-others') {
-				div += '<p>Requested by: ' + requestUserName + '</p>';
-			} else {
-				div += '<p>Owner: ' + bookOwnerName + '</p>';
-			}
 			div += '<button type="button" class="btn btn-danger btn-xs remove-button">Remove request</button>';
 			if (book.authors) {
 				div += '<p class="authors">by ' + book.authors + '</p>';
@@ -58,6 +66,7 @@ console.log('swaps2 called');
 			div += '</div>'; //col-sm-9
 			div += '</div>'; // row
 			div += '</div>'; //end format book display
+			console.log(div);
 			$(request).append(div);
 		}
 

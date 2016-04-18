@@ -7,11 +7,14 @@ var dbURI = 'mongodb://localhost/bookswap';
 var swapProposal;
 var userMakingOffer;
 var userReceivingOffer;
+var industryIdentifier;
+var timestamp;
+var requestedBy;
 
 
 function callback (err, results){
 	if (err) {
-		console.log('error storing book', err) 
+		console.log('error storing book', err);
 		// mongoose.connection.close(function() { //TODO add err object as function parameter??
 	 //        console.log('disconnected from DB');
 		// });
@@ -25,9 +28,10 @@ function callback (err, results){
 } 
 
 
-function updateUserRequests(){
-	var industryIdentifier = swapProposal.requestedBook.industryIdentifier;
-	var timestamp = swapProposal.requestedBook.timestamp; 
+function updateUserRequests() {
+	industryIdentifier = swapProposal.requestedBook.industryIdentifier;
+	timestamp = swapProposal.requestedBook.timestamp; 
+	requestedBy = userMakingOffer;
 	console.log(industryIdentifier, timestamp);
 	if (mongoose.connection.readyState === 0){
 		var db = mongoose.connect(dbURI, function(err){
@@ -35,8 +39,9 @@ function updateUserRequests(){
 				console.log(err);
 				return;
 			}
-		}
+		});
 	}
+	
 		bookModel.update({user: userMakingOffer}, {'$push': {requests: swapProposal}}, callback);
 		bookModel.update({user: userReceivingOffer}, {'$push': {requests: swapProposal}}, callback);
 		bookModel.update({user: userReceivingOffer, 'books.industryIdentifier': industryIdentifier, 'books.timestamp': timestamp}, {'$set': {'books.$.requestedBy': requestedBy}}, callback);
@@ -56,4 +61,3 @@ router.post('/', function(req, res){
 });
 
 module.exports = router;
-

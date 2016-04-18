@@ -4,10 +4,8 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var bookModel = require('../config/book-model.js');
-var mybooks;
-var myrequests;
+var requests;
 var user;
-var bookData;
 
 router.use('/', function(req, res, next){
 	user = req.body.user;
@@ -23,12 +21,9 @@ router.use('/', function(req, res, next){
 			console.log(err);
 			return;
 		} else if (results.length !== 0){
-			mybooks = results[0].books;
-			myrequests = results[0].requests;
-			console.log('mybooks', mybooks);
-			console.log('myrequests', myrequests);
-			bookData = {'bookData': [mybooks, myrequests]};
-			console.log(bookData);
+			requests = results[0].requests;
+			requests = {'requests': requests};
+			console.log(requests);
 
 		// mongoose.connection.close(function(){
 		// 	console.log('Mongoose connection disconnected');
@@ -59,8 +54,9 @@ router.use('/', function(req, res, next){
 // });
 
 router.post('/', function(req, res){
-	if (bookData){
-		res.json(bookData);
+	if (requests){
+		// res.sendStatus(200);
+		res.json(requests);
 	}
 });
 

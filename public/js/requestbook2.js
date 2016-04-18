@@ -93,10 +93,10 @@
 			var request = {requestedBook: book, offeredBook: offeredBook};
 			console.log('request', request);
 			$.post('http://localhost:3000/request-swap', {'swapProposal': {requestedBook: book, offeredBook: offeredBook}});
-			$.post('http://localhost:3000/request-book', {'bookRequest': {requestedBy: user, bookDetails: bookDetails}});
+			// $.post('http://localhost:3000/request-book', {'bookRequest': {requestedBy: user, bookDetails: book}});
 
 			//TODO: message that book has been requested
-			// window.close()
+			window.close()
 		});
 	}
 

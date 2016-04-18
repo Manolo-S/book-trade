@@ -15,11 +15,16 @@ var BookSchema = new Schema({
 	_id: false
 });
 
+var RequestSchema = new Schema({
+	requestedBook: BookSchema,
+	offeredBook: BookSchema
+});
+
 
 var UserSchema = new Schema({
 	user: String,
 	books: [BookSchema],
-	requests: [BookSchema]
+	requests: [RequestSchema]
 });
 
 module.exports = mongoose.model('users', UserSchema);
