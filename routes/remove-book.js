@@ -3,9 +3,10 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var bookModel = require('../config/book-model');
-var bookArr;
+var industryIdentifier;
+var timestamp;
 var user;
-var requests = [];  
+var requests;  
 var dbURI = 'mongodb://localhost/bookswap';
 
 function callback (err, results){
@@ -19,22 +20,48 @@ function callback (err, results){
 	// }
 } 
 
+function findRequests(r){
+	if (r.requestedBook.industryIdentifier === industryIdentifier && r.requestedBook.timestamp === timestamp){
+		var otherUser = r.offeredBook.owner;
+		bookModel.update({user: otherUser}, {$pull: {requests: {'requestedBook.industryIdentifier': industryIdentifier, 'requestedBook.timestamp': timestamp}}}, callback);
+		bookModel.update({user: otherUser}, {$pull: {requests: {'offeredBook.industryIdentifier': industryIdentifier, 'offeredBook.timestamp': timestamp}}}, callback);
+		console.log('otherUser', otherUser);
+	}
+	
+}
+
+function callback2 (err, results){
+	console.log('callback2');
+	if (err) {
+		console.log('error removing book', err)
+		return;
+	}
+	requests = results[0].requests;
+	// console.log('requests', requests);
+	requests.map(findRequests);
+
+}
+
+
 router.post('/', function(req, res){
 	if (req.body){
 		res.sendStatus(200);
 	}
-	var industryIdentifier = req.body.industryIdentifier;
+	industryIdentifier = req.body.industryIdentifier;
 	var requestedBy = req.body.requestedBy;
-	console.log('requestedBy', requestedBy);
-	var timestamp = req.body.timestamp;
+	timestamp = req.body.timestamp;
 	user = req.body.user;
 	if (mongoose.connection.readyState === 0){
 		var db = mongoose.connect('mongodb://localhost/bookswap');
 	}
-	bookModel.update({user: user}, {$pull: {books: {'industryIdentifier': industryIdentifier, 'timestamp': timestamp}}}, callback);
-	if (requestedBy !== ""){
-		bookModel.update({user: requestedBy}, {$pull: {requests: {industryIdentifier: industryIdentifier, timestamp: timestamp}}}, callback);
-	}
+	// bookModel.update({user: user}, {$pull: {books: {'industryIdentifier': industryIdentifier, 'timestamp': timestamp}}}, callback);
+	bookModel.find({user: user}, callback2);
+
+	bookModel.update({user: user}, {$pull: {requests: {'offeredBook.industryIdentifier': industryIdentifier,
+												'offeredBook.timestamp': timestamp}}}, callback);
+	bookModel.update({user: user}, {$pull: {requests: {'requestedBook.industryIdentifier': industryIdentifier,
+												'requestedBook.timestamp': timestamp}}}, callback);
+	
 });
 
 module.exports = router;
