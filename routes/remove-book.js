@@ -13,11 +13,6 @@ function callback (err, results){
 	if (err) {
 		console.log('error removing book', err) 
 	}
-	// } else {
-	// 	mongoose.connection.close(function() { //TODO add err object as function parameter??
-	//         console.log('disconnected from DB');
-	// 	});
-	// }
 } 
 
 function findRequests(r){
@@ -48,7 +43,6 @@ router.post('/', function(req, res){
 		res.sendStatus(200);
 	}
 	industryIdentifier = req.body.industryIdentifier;
-	var requestedBy = req.body.requestedBy;
 	timestamp = req.body.timestamp;
 	user = req.body.user;
 	if (mongoose.connection.readyState === 0){
