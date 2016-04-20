@@ -44,7 +44,7 @@ function updateUserRequests() {
 	
 		bookModel.update({user: userMakingOffer}, {'$push': {requests: swapProposal}}, callback);
 		bookModel.update({user: userReceivingOffer}, {'$push': {requests: swapProposal}}, callback);
-		bookModel.update({user: userReceivingOffer, 'books.industryIdentifier': industryIdentifier, 'books.timestamp': timestamp}, {'$set': {'books.$.requestedBy': requestedBy}}, callback);
+		// bookModel.update({user: userReceivingOffer, 'books.industryIdentifier': industryIdentifier, 'books.timestamp': timestamp}, {'$set': {'books.$.requestedBy': requestedBy}}, callback);
 }
 
 

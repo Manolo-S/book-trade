@@ -7,7 +7,7 @@
 	var book;
 
 	function displayBook(book){
-		if (book.requestedBy !== ""){return;}
+		// if (book.requestedBy !== ""){return;}
 		var industryIdentifier = book.industryIdentifier;
 		var div = '<div class="book">'; //start format book display
 		div += '<div class="row">';

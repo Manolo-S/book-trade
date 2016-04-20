@@ -1,34 +1,46 @@
 'use strict';
-console.log('swaps2 called');
+// console.log('swaps2 called');
 
 
 (function() {
-
+	var l;
 	var user = store.get('user');
 
 	function whoseRequest(results) {
-		// console.log('whoserequest', results);
 		var requests = results.requests;
 		$('#requests-mine').empty();
 		$('#requests-others').empty();
 		requests.map(displaySwap);
+		$('.remove-button').click(function(e) {
+			var target = $(e.target);
+			var industryIdentifier = target.prev().find('#industryIdentifier').text();
+			var timestamp = target.prev().find('#timestamp').text();
+			var otherPartyUsername = target.prev().find('#otherPartyUsername').text();
+			console.log(user, otherPartyUsername, industryIdentifier, timestamp);
+
+			target.parents('.swap').remove();
+			$.post('http://localhost:3000/remove-request', {
+				user: user,
+				industryIdentifier: industryIdentifier,
+				timestamp: timestamp,
+				otherPartyUsername: otherPartyUsername
+			});
+		})
 	}
 
 
-	function displaySwap(swap) {
+	function displaySwap(swap, index) {
 		console.log('displaybooks called');
-		// console.log(swap.offeredBook.owner, user);
 		var request = swap.offeredBook.owner === user ? '#requests-mine' : '#requests-others';
-		// console.log(request);
 		var swapArr = [swap.offeredBook, swap.requestedBook];
-		// console.log(swapArr);
+		var otherPartyUsername = user === swap.offeredBook.owner? swap.requestedBook.owner : swap.offeredBook.owner;
 
+		var div = '<div class="swap">'
 
 		for (var i = 0; i < swapArr.length; i++) {
-			console.log(swapArr[i]);
+			// console.log(swapArr[i]);
 			var book = swapArr[i];
 			var userName = (book.owner.split(','))[2];
-			var div = '<div class="swap">'
 			if (i === 0 && user === book.owner){
 				div += '<h4>I\'ll swap:</h4>';
 			} 
@@ -50,7 +62,6 @@ console.log('swaps2 called');
 			div += '</div>'; // col-sm-3
 			div += '<div class="col-sm-9 book-details">';
 			div += '<p class="book-title">' + book.title + '</p>';
-			div += '<button type="button" class="btn btn-danger btn-xs remove-button">Remove request</button>';
 			if (book.authors) {
 				div += '<p class="authors">by ' + book.authors + '</p>';
 			}
@@ -61,36 +72,35 @@ console.log('swaps2 called');
 			div += '<p>' + 'Language: ' + book.language + '</p>';
 			div += '<p id="industryIdentifier">' + book.industryIdentifier + '</p>';
 			div += '<span id="timestamp">' + book.timestamp + '</span>';
-			div += '<span id="user">' + user + '</span>';
-			div += '<span id="requestedBy">' + book.requestedBy + '</span>';
-			div += '<span id="owner">' + book.owner + '</span>';
+			div += '<span id="otherPartyUsername">' + otherPartyUsername + '</span>';
 			div += '</div>'; //col-sm-9
 			div += '</div>'; // row
 			div += '</div>'; //end format book display
-			if (i === 1){
-				div += '</div>'///end swap
-			}
-			console.log(div);
-			$(request).append(div);
 		}
+		div += '<button type="button" class="btn btn-danger btn-xs remove-button pull-right">Remove request</button>';
+		div += '</div>'///end swap
+		$(request).append(div);
 
-		$('.remove-button').click(function(e) {
-			var target = $(e.target);
-			var industryIdentifier = target.siblings('#industryIdentifier').text();
-			var timestamp = target.siblings('#timestamp').text();
-			var user = target.siblings('#user').text();
-			var requestedBy = target.siblings('#requestedBy').text();
-			var owner = target.siblings('#owner').text();
-			// target.parents('.book').remove();
-			$.post('http://localhost:3000/remove-request', {
-				user: user,
-				industryIdentifier: industryIdentifier,
-				timestamp: timestamp,
-				requestedBy: requestedBy,
-				owner: owner
-			});
-		});
+		
+		// $('.remove-button').click(function(e) {
+		// 	var target = $(e.target);
+		// 	var industryIdentifier = target.prev().find('#industryIdentifier').text();
+		// 	var timestamp = target.prev().find('#timestamp').text();
+		// 	var otherPartyUsername = target.prev().find('#otherPartyUsername').text();
+		// 	console.log(user, otherPartyUsername, industryIdentifier, timestamp);
+
+		// 	target.parents('.swap').remove();
+		// 	// $.post('http://localhost:3000/remove-request', {
+		// 	// 	user: user,
+		// 	// 	industryIdentifier: industryIdentifier,
+		// 	// 	timestamp: timestamp,
+		// 	// 	owner: owner
+		// 	// });
+		// })
 	}
+
+
+		
 
 	$.post('http://localhost:3000/requested-books', {
 		'user': user

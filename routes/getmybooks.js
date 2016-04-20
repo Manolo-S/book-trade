@@ -21,6 +21,7 @@ router.use('/', function(req, res, next){
 			return;
 		} else if (results.length !== 0){
 			books = results[0].books;
+			console.log(books);
 
 		mongoose.connection.close(function(){
 			console.log('Mongoose connection disconnected');
