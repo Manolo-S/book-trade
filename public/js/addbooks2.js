@@ -70,6 +70,7 @@
 
 		$('.add-button').click(function(e){
 			var target = $(e.target);
+			$(target).text('Book added').css('background-color', 'green');
 			var bookObj = JSON.parse(target.siblings('span').text());
 			// console.log(bookObj);
 			$.post('http://localhost:3000/add-new-book', {data: [bookObj]});

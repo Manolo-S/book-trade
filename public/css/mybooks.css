@@ -18,7 +18,7 @@ li span, .request-details
 .book {
 	border-top: thin solid #ddd;
 	padding-top: 1rem;
-	margin-bottom: 1rem;
+	margin-bottom: 3rem;
 	font-size: 1.2rem;
 }
 
@@ -90,5 +90,5 @@ span {
 }
 
 .swap {
-	margin-bottom: 5rem;
+	margin-bottom: 2rem;
 }

@@ -73,6 +73,8 @@
 
 		$('.swap-button').click(function(e){
 			var target = $(e.target);
+			$(target).text('Swap proposal sent');
+			$(target).css('background-color','green');
 			var title = target.siblings('#title').text();
 			var authors = target.siblings('#authors').text();
 			var offeredBook = target.siblings('.offered-book').text();
@@ -80,7 +82,7 @@
 			var owner = offeredBook[0] + ',' + offeredBook[1] + ',' + offeredBook[2];
 			var image = offeredBook[3];
 			var publishedDate = offeredBook[4];
-			var pages = offeredBook[5];
+			var pages = offeredBook[5];   
 			var language = offeredBook[6];
 			var industryIdentifier = offeredBook[7];
 			var timestamp = offeredBook[8];
@@ -95,8 +97,6 @@
 			$.post('http://localhost:3000/request-swap', {'swapProposal': {requestedBook: book, offeredBook: offeredBook}});
 			// $.post('http://localhost:3000/request-book', {'bookRequest': {requestedBy: user, bookDetails: book}});
 
-			//TODO: message that book has been requested
-			window.close()
 		});
 	}
 
