@@ -28,8 +28,9 @@ router.post('/', function(req, res){
 	if (mongoose.connection.readyState === 0){
 		var db = mongoose.connect('mongodb://localhost/bookswap');
 	}
-	bookModel.update({user: otherPartyUsername}, {'$pull': {requests: {industryIdentifier: industryIdentifier, timestamp: timestamp}}}, callback);
-    bookModel.update({user: user}, {'$pull': {requests: {industryIdentifier: industryIdentifier, timestamp: timestamp}}}, callback);
+	bookModel.update({user: otherPartyUsername}, {'$pull': {requests: {'offeredBook.owner': user, 'offeredBook.industryIdentifier': industryIdentifier, 'offeredBook.timestamp': timestamp}}}, callback);
+    bookModel.update({user: user}, {'$pull': {requests: {'offeredBook.owner': user, 'offeredBook.industryIdentifier': industryIdentifier, 
+    													'offeredBook.timestamp': timestamp, 'requestedBook.owner': otherPartyUsername}}}, callback);
 });
 
 module.exports = router;

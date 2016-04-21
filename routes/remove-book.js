@@ -34,7 +34,6 @@ function callback2 (err, results){
 	requests = results[0].requests;
 	// console.log('requests', requests);
 	requests.map(findRequests);
-
 }
 
 
@@ -55,7 +54,6 @@ router.post('/', function(req, res){
 												'offeredBook.timestamp': timestamp}}}, callback);
 	bookModel.update({user: user}, {$pull: {requests: {'requestedBook.industryIdentifier': industryIdentifier,
 												'requestedBook.timestamp': timestamp}}}, callback);
-	
 });
 
 module.exports = router;
