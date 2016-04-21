@@ -92,3 +92,20 @@ span {
 .swap {
 	margin-bottom: 2rem;
 }
+
+.requests-others{
+	border-bottom: 1px solid #222;
+	padding-bottom: 2rem;
+}
+
+
+nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+    color: #999;
+    background-color: transparent;
+}
+
+span.username {
+	color: #000033;
+	display: inline;
+
+}

@@ -47,7 +47,7 @@
 			} 
 
 			if (i === 0 && user!== book.owner) {
-				div += '<h4>User ' + userName + ' would like to swap:</h4>';
+				div += '<h4>User <span class="username">' + userName + '</span> would like to swap:</h4>';
 			}
 
 			if (i === 1){

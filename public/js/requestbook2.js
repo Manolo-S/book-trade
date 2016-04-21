@@ -86,11 +86,9 @@
 			var language = offeredBook[6];
 			var industryIdentifier = offeredBook[7];
 			var timestamp = offeredBook[8];
-	        // console.log('book', book);
 
 			offeredBook = {owner: owner, image: image, title: title, authors: authors, publishedDate: publishedDate,
 	            pages: pages, language: language, industryIdentifier: industryIdentifier, timestamp: timestamp};
-			// console.log('offeredBook', offeredBook);
 
 			var request = {requestedBook: book, offeredBook: offeredBook};
 			console.log('request', request);
