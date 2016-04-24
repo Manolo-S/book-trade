@@ -40,14 +40,14 @@
 			div += '<div class="row">';
 			div += '<div class="col-sm-3">';
 			if (book.imageLinks){
-				div += '<img src="' + book["imageLinks"]["smallThumbnail"] + '">';
+				div += '<img src="' + book["imageLinks"]["smallThumbnail"] + '" alt="book cover">';
 				imageLink = book["imageLinks"]["smallThumbnail"];
 			} else {
 				imageLink = 'no-image'; //some books have a link to an image but it's just a white block, so decided not to display anything if the book has no imagelink
 			}	
 			div += '</div>'; // col-sm-3
-			div += '<div class="col-sm-9 book-details">';
-			div += '<p class="book-title">' + book.title + ' ' + '</p>';
+			div += '<section class="col-sm-9 book-details">';
+			div += '<cite class="book-title">' + book.title + ' ' + '</cite>';
 			div += '<button type="button" class="btn btn-primary btn-xs add-button">Add book</button>';
 			if (book.authors){
 				book.authors.map(authorsFun);
@@ -62,7 +62,7 @@
 			div += '<span>{"owner": "' + user + '", "image": "' + imageLink + '", "title": "' + book.title;
 			div += '", "authors": "' + authors + '", "publishedDate": "' + book.publishedDate;
 			div += '", "pages": "' + book.pageCount + '", "language": "' + lang + '", "industryIdentifier": "' + bookId + '", "requestedBy": "", "timestamp": ' + Date.now() + '}</span>';
-			div += '</div>'; //col-sm-9
+			div += '</section>'; //col-sm-9
 			div += '</div>'; // row
 			div += '</div>'; //end format book display
 			$('#content').append(div);

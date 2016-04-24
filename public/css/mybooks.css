@@ -1,12 +1,14 @@
 body
 {
     font-family: Verdana, Arial;
+    font-size: 62.5%;
 }
 
 li span, .request-details
 {
     display: none;
 }
+
 
 #search-button
 {
@@ -24,7 +26,10 @@ li span, .request-details
 
 .book-title {
 	font-size: 1.8rem;
+	font-style:	normal;
 	color: #000033;
+	margin-right: 1rem;
+
 }
 
 .book-details {
@@ -33,7 +38,8 @@ li span, .request-details
 
 .add-button, .remove-button, .request-button, .swap-button {
 	margin-top: -0.1rem;
-	margin-bottom: 0.9rem;
+	margin-bottom: 0.5rem;
+	font-size: 1.3rem;
 }
 
 .close-button{
@@ -42,7 +48,8 @@ li span, .request-details
 
 
 p {
-	line-height: 70%
+	line-height: 70%;
+	font-size: 1.4rem;
 }
 
 p.book-title, p.authors {
@@ -51,14 +58,19 @@ p.book-title, p.authors {
 
 
 img {
-	max-height: 17rem;
+	max-height: 15rem;
 }
 
 @media screen and (max-width:767px){
-	p.book-title {
-		margin-top: 1rem;
+	img, .book-details {
+		margin-left: 5%;
+	}
+
+	img {
+		margin-bottom: 1rem;
 	}
 }
+
 
 .navigation-bar {
 	background-color: #232f3e;
@@ -66,6 +78,7 @@ img {
 
 .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
 	color: #fff;
+	font-size: 1.4rem;
 }
 
 .navbar .navbar-nav{
