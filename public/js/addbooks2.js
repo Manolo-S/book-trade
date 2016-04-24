@@ -85,8 +85,8 @@
 	}
 
 
-	$('#search-button').click(function() {
-		findBook();
+	$('#search-button').on('keypress click', function(e) {
+		if (e.which === 13 || e.type === 'click') {findBook();};
 	});
 
 	$('#search-box').keypress(function(e) {
