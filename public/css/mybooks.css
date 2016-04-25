@@ -13,22 +13,18 @@ body
     color: #fff;
 }
 
-.navbar .navbar-nav, 
-{
-    padding-top: .1rem;
-}
-
 .navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:focus,
 .navbar-default .navbar-nav > .active > a:hover
 {
     padding-bottom: 1.8rem;
+
     color: #222;
 }
 
-nav > li > a:focus,
 .navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-brand:hover
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-brand:focus
 {
     padding-bottom: 1.8rem;
 
@@ -36,8 +32,30 @@ nav > li > a:focus,
     background-color: #e7e7e7;
 }
 
-.navbar-default .navbar-brand:hover {
-	height: 5.3rem;
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus
+{
+    height: 5.3rem;
+}
+
+#twitter-a:hover,
+#twitter-a:focus
+{
+    height: 5.3rem;
+
+    color: #99e6ff;
+}
+
+#twitter-logo
+{
+    font-size: 1.5em;
+
+    color: #1da1f2;
+}
+
+.navigation-bar
+{
+    background-color: #232f3e;
 }
 
 
@@ -56,11 +74,6 @@ button.add-button:focus
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
             box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-}
-
-button.add-button:focus
-{
-    border-color: #f33;
 }
 
 #search-button
@@ -104,12 +117,20 @@ button.add-button:focus
     font-size: 1.3rem;
 
     margin-top: -.1rem;
-    margin-bottom: .3rem;
+    margin-bottom: .5rem;
 }
 
 .close-button
 {
     margin-top: 5rem;
+}
+
+.btn-danger {
+	background-color: #C9302C;
+}
+
+.btn-danger:hover, .btn-danger:focus{
+	background-color: #541512;
 }
 
 
@@ -125,56 +146,15 @@ p.authors
     line-height: 100%;
 }
 
-
 img
 {
     max-height: 15rem;
 }
 
-@media screen and (max-width:767px)
-{
-    img,
-    .book-details
-    {
-        margin-left: 5%;
-    }
-
-    img
-    {
-        margin-bottom: 1rem;
-    }
-}
-
-
-.navigation-bar
-{
-    background-color: #232f3e;
-}
-
-
 #add-books-link
 {
     color: black;
 }
-
-#twitter-logo
-{
-    font-size: 1.5em;
-
-    color: #1da1f2;
-}
-
-#twitter-logo:focus,
-#twitter-logo:hover
-{
-    color: #99e6ff;
-}
-
-#twitter-a:hover {
-	padding-bottom: 1.5rem;
-}
-
-
 
 span
 {
@@ -194,11 +174,24 @@ span
 }
 
 
-
-
 span.username
 {
     display: inline;
 
     color: #003;
+}
+
+
+@media screen and (max-width:767px)
+{
+    img,
+    .book-details
+    {
+        margin-left: 5%;
+    }
+
+    img
+    {
+        margin-bottom: 1rem;
+    }
 }
