@@ -1,14 +1,18 @@
 body
 {
     font-family: Verdana, Arial;
-    font-size: 62.5%;
+    font-size: 1em;
 }
 
+nav, section {
+	display: block;
+}
+ 
 
 .navbar-default .navbar-brand,
 .navbar-default .navbar-nav > li > a
 {
-    font-size: 1.4rem;
+    font-size: 1.4em;
 
     color: #fff;
 }
@@ -16,7 +20,7 @@ body
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover
 {
-    padding-bottom: 1.8rem;
+    padding-bottom: 1.2em;
 
     color: #222;
 }
@@ -26,7 +30,7 @@ body
 .navbar-default .navbar-nav > li > a:focus,
 .navbar-default .navbar-brand:focus
 {
-    padding-bottom: 1.8rem;
+    padding-bottom: 1.2em;
 
     color: #222;
     background-color: #e7e7e7;
@@ -35,20 +39,20 @@ body
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus
 {
-    height: 5.3rem;
+    height: 3.7em;
 }
 
 #twitter-a:hover,
 #twitter-a:focus
 {
-    height: 5.3rem;
+    height: 3.7em;
 
     color: #99e6ff;
 }
 
 #twitter-logo
 {
-    font-size: 1.5em;
+    font-size: 1.3em;
 
     color: #1da1f2;
 }
@@ -86,27 +90,27 @@ button.add-button:focus
 
 .book
 {
-    font-size: 1.2rem;
+    font-size: 1.1em;
 
-    margin-bottom: 3rem;
-    padding-top: 1rem;
+    margin-bottom: 2em;
+    padding-top: 1em;
 
     border-top: thin solid #ddd;
 }
 
 .book-title
 {
-    font-size: 1.8rem;
+    font-size: 1.6em;
     font-style: normal;
 
-    margin-right: 1rem;
+    margin-right: 1em;
 
     color: #003;
 }
 
 .book-details
 {
-    margin-left: -1rem;
+    margin-left: -1em;
 }
 
 .add-button,
@@ -114,15 +118,22 @@ button.add-button:focus
 .request-button,
 .swap-button
 {
-    font-size: 1.3rem;
+    font-size: 1.3em;
 
-    margin-top: -.1rem;
-    margin-bottom: .5rem;
+    margin-top: -.1em;
+    margin-bottom: .5em;
+}
+
+.add-button:focus, .add-button:hover,
+#search-button:focus, .search-button:hover,
+.request-button:focus, .request-button:hover {
+    background-color: #333;
+    color: white;
 }
 
 .close-button
 {
-    margin-top: 5rem;
+    margin-top: 5em;
 }
 
 .btn-danger {
@@ -136,7 +147,7 @@ button.add-button:focus
 
 p
 {
-    font-size: 1.4rem;
+    font-size: 1.4em;
     line-height: 70%;
 }
 
@@ -148,7 +159,7 @@ p.authors
 
 img
 {
-    max-height: 15rem;
+    max-height: 15em;
 }
 
 #add-books-link
@@ -163,12 +174,12 @@ span
 
 .swap
 {
-    margin-bottom: 2rem;
+    margin-bottom: 2em;
 }
 
 .requests-others
 {
-    padding-bottom: 2rem;
+    padding-bottom: 2em;
 
     border-bottom: 1px solid #222;
 }
@@ -192,6 +203,7 @@ span.username
 
     img
     {
-        margin-bottom: 1rem;
+        margin-bottom: 1em;
     }
 }
+

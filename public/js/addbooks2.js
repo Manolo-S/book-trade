@@ -6,6 +6,7 @@
 	var bookId;
 	var imageLink;
 	var user = store.get('user');                        //['twitter', '12345', 'Jan']; // placeholder for now, will later be used for twitter or facebook userid
+
 	function authorsFun(author, index) {
 		if (index === book.authors.length - 1) {
 			authors += author;
@@ -90,9 +91,7 @@
 	});
 
 	$('#search-box').keypress(function(e) {
-		if (e.which === 13) {
-			findBook();
-		}
+		if (e.which === 13) {findBook();}
 	});
 
 	var languageCodes = {
@@ -281,6 +280,6 @@
 		za: 'Zhuang, Chuang ',
 		zu: 'Zulu '
 	};
-})();
+})()
 
 

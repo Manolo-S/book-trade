@@ -58,11 +58,11 @@
 			div += '<div class="row">';
 			div += '<div class="col-sm-3">';
 			if (book.image && book.image !== 'no-image') {
-				div += '<img src="' + book.image + '">';
+				div += '<img src="' + book.image + '" alt="book cover">';
 			}
 			div += '</div>'; // col-sm-3
 			div += '<div class="col-sm-9 book-details">';
-			div += '<p class="book-title">' + book.title + '</p>';
+			div += '<cite class="book-title">' + book.title + '</cite>';
 			if (book.authors) {
 				div += '<p class="authors">by ' + book.authors + '</p>';
 			}
