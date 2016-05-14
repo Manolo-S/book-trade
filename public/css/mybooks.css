@@ -1,13 +1,15 @@
 body
 {
     font-family: Verdana, Arial;
-    font-size: 1em;
+    font-size: 100%;
 }
 
-nav, section {
-	display: block;
+nav,
+section
+{
+    display: block;
 }
- 
+
 
 .navbar-default .navbar-brand,
 .navbar-default .navbar-nav > li > a
@@ -42,19 +44,25 @@ nav, section {
     height: 3.7em;
 }
 
-#twitter-a:hover,
-#twitter-a:focus
-{
-    height: 3.7em;
-
-    color: #99e6ff;
-}
 
 #twitter-logo
 {
     font-size: 1.3em;
 
     color: #1da1f2;
+}
+
+#facebook-logo
+{
+    font-size: 1.3em;
+
+    color: #fff;
+}
+
+#facebook-a:hover #facebook-logo,
+#facebook-a:focus #facebook-logo
+{
+    color: #3B5998;
 }
 
 .navigation-bar
@@ -67,17 +75,6 @@ li span,
 .request-details
 {
     display: none;
-}
-
-
-#search-button:hover,
-#search-button:focus,
-button.add-button:focus
-{
-    border-color: #66afe9;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
 }
 
 #search-button
@@ -124,11 +121,15 @@ button.add-button:focus
     margin-bottom: .5em;
 }
 
-.add-button:focus, .add-button:hover,
-#search-button:focus, .search-button:hover,
-.request-button:focus, .request-button:hover {
-    background-color: #333;
+.add-button:focus,
+.add-button:hover,
+#search-button:focus,
+#search-button:hover,
+.request-button:focus,
+.request-button:hover
+{
     color: white;
+    background-color: #333;
 }
 
 .close-button
@@ -136,12 +137,15 @@ button.add-button:focus
     margin-top: 5em;
 }
 
-.btn-danger {
-	background-color: #C9302C;
+.btn-danger
+{
+    background-color: #c9302c;
 }
 
-.btn-danger:hover, .btn-danger:focus{
-	background-color: #541512;
+.btn-danger:hover,
+.btn-danger:focus
+{
+    background-color: #541512;
 }
 
 
@@ -206,4 +210,3 @@ span.username
         margin-bottom: 1em;
     }
 }
-

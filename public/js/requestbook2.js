@@ -45,11 +45,11 @@
 			div += '<div class="row">';
 			div += '<div class="col-sm-3">';
 			if (bookOffer.image && bookOffer.image !== 'no-image') {
-				div += '<img src="' + bookOffer.image + '">';
+				div += '<img src="' + bookOffer.image + '" alt="book cover">';
 			}
 			div += '</div>'; // col-sm-3
 			div += '<div class="col-sm-9 book-details">';
-			div += '<p class="book-title">' + bookOffer.title + '</p>';
+			div += '<cite class="book-title">' + bookOffer.title + '</cite>';
 			div += '<button type="button" class="btn btn-primary btn-xs swap-button">Offer to swap</button>';
 			if (bookOffer.authors) {
 				div += '<p class="authors">by ' + bookOffer.authors + '</p>';

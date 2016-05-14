@@ -1,10 +1,14 @@
 'use strict';
 
+_LTracker.push('Hello World');
+
 (function(){
 	var owner;
 	var user = store.get('user');
 	var url = 'http://localhost:3000/request-book';
 	var book;
+
+
 
 	function displayBook(book){
 		// if (book.requestedBy !== ""){return;}

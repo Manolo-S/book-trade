@@ -3,9 +3,9 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 module.exports = function(){
 	passport.use(new FacebookStrategy({
-		clientID:'609917432488997',
-		clientSecret: '62f6253087724631415c2e93108f7b75',
-		callbackURL: 'https://pic-wall.herokuapp.com/auth/facebook/callback',
+		clientID:'994422223987374',
+		clientSecret: '1c64b79efdf293ee772c435b0901de6d',
+		callbackURL: 'https://book-trade-ms.herokuapp.com/auth/facebook/callback',
 		passReqToCallback: true
 	},
 	function (req, accessToken, refreshToken, profile, done){

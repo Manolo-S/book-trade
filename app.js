@@ -19,19 +19,20 @@ var removeBook = require('./routes/remove-book');
 var removeRequest = require('./routes/remove-request');
 var requestBook = require('./routes/requestbook');
 var requestSwap = require('./routes/requestswap');
-// var auth = require('./routes/auth');
+var auth = require('./routes/auth');
 
 
 var app = express();
-// var db = mongoose.connect('mongodb://piet:snot@ds047722.mlab.com:47722/pic-wall')
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(session({secret: 'anything'})); //TODO bekijk Express-session package
 
-// require('./config/passport')(app);
+require('./config/passport')(app);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/addbooks', addBooks);
+app.use('/auth', auth);
 app.use('/add-new-book', addNewBook);
 app.use('/mybooks', myBooks);
 app.use('/get-my-books', getMyBooks);

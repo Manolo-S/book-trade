@@ -4,6 +4,13 @@
 		<meta charset='UTF-8'>
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		<script src='/build/js/swaps.js'></script>
+		<!--[if lt IE 9]>
+		<script src="/lib/html5shiv.min.js"></script>
+		<![endif]-->
+		<!--[if (gte IE 6)&(lte IE 8)]>
+		<script type="text/javascript" src="/lib/selectivizr.-min.js"></script>
+		<noscript><link rel="stylesheet" href="[fallback css]" /></noscript>
+		<![endif]-->
 		<title>Swaps</title>
 	</head>
 	<body>
@@ -23,11 +30,6 @@
 					<li><a href='/mybooks'>My books</a></li>
 					<li><a href='/addbooks'>Add books</a></li>
 					<li class='active'><a href='#' id='swaps-link'>Swaps<span class='sr-only'>(current)</span></a></li>
-					<li><a href='/settings'>Settings</a></li>
-					<li>
-						<a class='twitter' id='twitter-a' href='/auth/twitter'><i class=
-						'fa fa-twitter' id='twitter-logo'></i></a>
-					</li>
 				</ul>
 			</div>
 		</nav>
