@@ -3,7 +3,8 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var bookModel = require('../config/book-model');
-var dbURI = 'mongodb://localhost/bookswap';
+var dbUrl = 'mongodb://localhost/bookswap';
+// var dbUrl = 'mongodb://piet:snot@ds021000.mlab.com:21000/bookswap';
 var swapProposal;
 var userMakingOffer;
 var userReceivingOffer;
@@ -34,7 +35,7 @@ function updateUserRequests() {
 	requestedBy = userMakingOffer;
 	console.log(industryIdentifier, timestamp);
 	if (mongoose.connection.readyState === 0){
-		var db = mongoose.connect(dbURI, function(err){
+		var db = mongoose.connect(dbUrl, function(err){
 			if (err){
 				console.log(err);
 				return;

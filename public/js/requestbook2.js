@@ -1,6 +1,10 @@
 'use strict';
 
 (function (){
+	var requestSwapUrl = 'http://localhost:3000/request-swap';
+	// var requestSwapUrl = 'https://book-trade-ms.herokuapp.com/request-swap';
+	var getMyBooksUrl = 'http://localhost:3000/get-my-books';
+	// var getMyBooksUrl = 'https://book-trade-ms.herokuapp.com/get-my-books';
 	var user = store.get('user');
 	var book = store.get('book');
 	// var owner = book.owner;
@@ -92,7 +96,7 @@
 
 			var request = {requestedBook: book, offeredBook: offeredBook};
 			console.log('request', request);
-			$.post('http://localhost:3000/request-swap', {'swapProposal': {requestedBook: book, offeredBook: offeredBook}});
+			$.post(requestSwapUrl, {'swapProposal': {requestedBook: book, offeredBook: offeredBook}});
 			// $.post('http://localhost:3000/request-book', {'bookRequest': {requestedBy: user, bookDetails: book}});
 
 		});
@@ -100,6 +104,6 @@
 
 	$('.close-button').click(function(){window.close()});
 
-	$.post('http://localhost:3000/get-my-books', {'user': user}, displayBooks);
+	$.post(getMyBooksUrl, {'user': user}, displayBooks);
 
 })();

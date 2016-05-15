@@ -1,6 +1,11 @@
 'use strict';
 
 (function() {
+	var removeRequestUrl = 'http://localhost:3000/remove-request';
+	// var removeRequestUrl = 'https://book-trade-ms.herokuapp.com/remove-request';
+	var requestedBooksUrl = 'http://localhost:3000/requested-books';
+	// var requestedBooksUrl = 'https://book-trade-ms.herokuapp.com/requested-books';
+
 	var user = store.get('user');
 
 	function whoseRequest(results) {
@@ -22,7 +27,7 @@
 			var otherPartyUsername = details[2] + ',' +  details[3] + ',' + details[4];
 			console.log(user, otherPartyUsername, industryIdentifier, timestamp);
 			target.parents('.swap').remove();
-			$.post('http://localhost:3000/remove-request', {
+			$.post(removeRequestUrl, {
 				user: user,
 				industryIdentifier: industryIdentifier,
 				timestamp: timestamp,
@@ -88,7 +93,7 @@
 	}
 
 
-	$.post('http://localhost:3000/requested-books', {
+	$.post(requestedBooksUrl, {
 		'user': user
 	}, whoseRequest);
 

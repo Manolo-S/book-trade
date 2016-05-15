@@ -7,7 +7,9 @@ var industryIdentifier;
 var timestamp;
 var user;
 var requests;  
-var dbURI = 'mongodb://localhost/bookswap';
+var dbUrl = 'mongodb://localhost/bookswap';
+// var dbUrl = 'mongodb://piet:snot@ds021000.mlab.com:21000/bookswap';
+
 
 function callback (err, results){
 	if (err) {
@@ -22,7 +24,6 @@ function findRequests(r){
 		bookModel.update({user: otherUser}, {$pull: {requests: {'offeredBook.industryIdentifier': industryIdentifier, 'offeredBook.timestamp': timestamp}}}, callback);
 		console.log('otherUser', otherUser);
 	}
-	
 }
 
 function callback2 (err, results){
@@ -45,7 +46,7 @@ router.post('/', function(req, res){
 	timestamp = req.body.timestamp;
 	user = req.body.user;
 	if (mongoose.connection.readyState === 0){
-		var db = mongoose.connect('mongodb://localhost/bookswap');
+		var db = mongoose.connect(dbUrl);
 	}
 	// bookModel.update({user: user}, {$pull: {books: {'industryIdentifier': industryIdentifier, 'timestamp': timestamp}}}, callback);
 	bookModel.find({user: user}, callback2);

@@ -6,6 +6,8 @@
 	var bookId;
 	var imageLink;
 	var user = store.get('user');                        //['twitter', '12345', 'Jan']; // placeholder for now, will later be used for twitter or facebook userid
+	var addNewBookUrl = 'http://localhost:3000/add-new-book';
+	// var addNewBookUrl = 'https://book-trade-ms.herokuapp.com/add-new-book';
 
 	function authorsFun(author, index) {
 		if (index === book.authors.length - 1) {
@@ -25,16 +27,14 @@
 		$('#content').empty();
 		for (var i = 0; i < response.items.length; i++) {
 			var item = response.items[i]; 
-			// in production code, item.text should have the HTML entities escaped.
 			authors = '';
 			book = item.volumeInfo;
-			// console.log('book:', book);
 			var lang = languageCodes[book.language];
 			var bookIdArr = book.industryIdentifiers;
 			if (bookIdArr && bookIdArr.length === 1){ // pre-isbn era books can have a non-ISBN identifier e.g. OSU 
 				bookId = bookIdArr[0].identifier; 
 			} else if (bookIdArr){        //if a book has more than one identifier it has a isbn10 and a isbn13 number, 
-				bookIdArr.map(isbn13Fun); //every pre 2007 === (pre isbn13) book that has an isbn10 number also has an isbn13 number 
+				bookIdArr.map(isbn13Fun); //every pre 2007 (=== pre isbn13) book that has an isbn10 number also has an isbn13 number 
 			}                             //beginning with 978 so we only use the isbn 13 number in this case
 			bookId = (bookIdArr === undefined ? '' : bookId); //some books have no industry identifier;
 			var div = '<div class="book">'; //start format book display
@@ -73,8 +73,7 @@
 			var target = $(e.target);
 			$(target).text('Book added').css('background-color', 'green');
 			var bookObj = JSON.parse(target.siblings('span').text());
-			// console.log(bookObj);
-			$.post('http://localhost:3000/add-new-book', {data: [bookObj]});
+			$.post(addNewBookUrl, {data: [bookObj]});
 		});
 	}
 
@@ -280,6 +279,4 @@
 		za: 'Zhuang, Chuang ',
 		zu: 'Zulu '
 	};
-})()
-
-
+}) ();

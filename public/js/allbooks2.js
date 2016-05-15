@@ -5,7 +5,10 @@ _LTracker.push('Hello World');
 (function(){
 	var owner;
 	var user = store.get('user');
-	var url = 'http://localhost:3000/request-book';
+	// var requestBookUrl = 'https://book-trade-ms.herokuapp.com/request-book';
+	// var requestBookUrl = 'http://localhost:3000/request-book';
+	// var getAllBooksUrl = 'https://book-trade-ms.herokuapp.com/get-all-books'
+	var getAllBooksUrl = 'http://localhost:3000/get-all-books'
 	var book;
 
 
@@ -75,10 +78,11 @@ _LTracker.push('Hello World');
 			// target.parents('.book').remove();
 			// $.post('http://localhost:3000/request-book', {'bookRequest': {requestedBy: user, bookDetails: bookDetails}});
 			store.set('book', book);
-			window.open(url);
+			window.open(requestBookUrl);
 		});
 	}
 	
-	$.get('http://localhost:3000/get-all-books', usersDataFun);
+	$.get(getAllBooksUrl, usersDataFun);
 
 })();
+

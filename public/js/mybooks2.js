@@ -5,6 +5,10 @@
 	// var user = 'twitter,1234,jan';  //TODO: change to store userid string after setting login via twitter/facebook
 	// store.set('user', user);
 	var user = store.get('user');
+	var removeBookUrl = 'http://localhost:3000/remove-book';
+	// var removeBookUrl = 'https://book-trade-ms.herokuapp.com/remove-book';
+	var getMyBooksUrl = 'http://localhost:3000/get-my-books';
+	// var getMyBooksUrl = 'https://book-trade-ms.herokuapp.com/get-my-books';
 
 	function displayBooks(booksArr) {
 		console.log('data', booksArr);
@@ -47,7 +51,7 @@
 			var timestamp = target.siblings('#timestamp').text();
 			var user = target.siblings('#user').text();
 			target.parents('.book').remove();
-			$.post('http://localhost:3000/remove-book', {
+			$.post(removeBookUrl, {
 				'user': user,
 				'industryIdentifier': industryIdentifier,
 				'timestamp': timestamp,
@@ -56,7 +60,7 @@
 		});
 	}
 
-	$.post('http://localhost:3000/get-my-books', {
+	$.post(getMyBooksUrl, {
 		'user': user
 	}, displayBooks);
 

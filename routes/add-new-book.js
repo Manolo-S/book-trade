@@ -6,7 +6,8 @@ var bookModel = require('../config/book-model');
 var bookArr;
 var user;
 var requests = [];  
-var dbURI = 'mongodb://localhost/bookswap';
+var dbUrl = 'mongodb://localhost/bookswap';
+// var dbUrl = 'mongodb://piet:snot@ds021000.mlab.com:21000/bookswap';
 var timestamp;
 var bookInDb;
 
@@ -48,7 +49,7 @@ function storeBook(err, books){
 
 function findUser(){
 	if (mongoose.connection.readyState === 0){
-		var db = mongoose.connect(dbURI, function(err){
+		var db = mongoose.connect(dbUrl, function(err){
 			if (err){
 				console.log(err);
 			} else {

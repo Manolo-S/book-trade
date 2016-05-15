@@ -6,13 +6,14 @@ var mongoose = require('mongoose');
 var bookModel = require('../config/book-model.js');
 var requests;
 var user;
+var dbUrl = 'mongodb://localhost/bookswap';
+// var dbUrl = 'mongodb://piet:snot@ds021000.mlab.com:21000/bookswap';
 
 router.use('/', function(req, res, next){
 	user = req.body.user;
 	console.log('user', user);
 	if (mongoose.connection.readyState === 0){
-		var db = mongoose.connect('mongodb://localhost/bookswap');
-		// var db = mongoose.connect('')
+		var db = mongoose.connect(dbUrl);
 	}
 
 	bookModel.find({user: user}, function(err, results ){
