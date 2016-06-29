@@ -3,15 +3,6 @@
 	<head>
 		<meta charset='UTF-8'>
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
-		<script type="text/javascript" src="http://cloudfront.loggly.com/js/loggly.tracker-2.1.min.js"></script>
-		<script>
-		  var _LTracker = _LTracker || [];
-		  _LTracker.push({
-		    'logglyKey': 'cf61d85b-996e-4036-a0d0-b89338f12c84',
-		    'sendConsoleErrors' : true,
-		    'tag' : 'loggly-jslogger' 
-		  });
-		</script>
 		<script src='/build/js/allbooks.js'></script>
 		<!--[if lt IE 9]>
 		<script src="/lib/html5shiv.min.js"></script>
@@ -39,18 +30,49 @@
 					<li><a href='/mybooks'>My Books</a></li>
 					<li><a href='/addbooks'>Add Books</a></li>
 					<li><a href='/swaps'>Swaps</a></li>
+					<li><a href='#' id='settings'>Settings</a></li>
 					<li>
 						<a class='twitter' id='twitter-a' href='/auth/twitter'><i class=
 						'fa fa-twitter' id='twitter-logo'></i></a>
 					</li>
 					<li>
-			          <a class='facebook' id='facebook-a' href='/auth/facebook'><i class=
-			          'fa fa-facebook' id='facebook-logo'></i></a>
-			        </li>
+						<a class='facebook' id='facebook-a' href='/auth/facebook'><i class=
+						'fa fa-facebook' id='facebook-logo'></i></a>
+					</li>
 				</ul>
 			</div>
 		</nav>
 		<div id='content' class='container'></div>
+		<div class='container'>
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">Settings</h4>
+						</div>
+						<div class="modal-body">
+							<form role="form">
+								<div className="form-group">
+									<label for="name">Name</label>
+									<input type="text" class='form-control' id='name' value=""></input>
+								</div>
+								<div className="form-group">
+									<label for="email">e-mail</label>
+									<input type="text" class='form-control' id='email' value=""></input>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<script src='/lib/store.min.js'></script>
 		<script src='/build/js/allbooks2.js'></script>
 	</body>

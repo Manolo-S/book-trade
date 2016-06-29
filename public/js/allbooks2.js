@@ -1,12 +1,16 @@
 'use strict';
 
-_LTracker.push('Hello World');
 
 (function(){
+	// var user = 'facebook,6789,klaas'; //TODO: change to store userid string after setting login via twitter/facebook
+	var user = 'twitter,1234,jan';  //TODO: change to store userid string after setting login via twitter/facebook
 	var owner;
+	store.remove('name');
+	store.remove('email');
+	store.set('user', user);
 	var user = store.get('user');
 	// var requestBookUrl = 'https://book-trade-ms.herokuapp.com/request-book';
-	// var requestBookUrl = 'http://localhost:3000/request-book';
+	var requestBookUrl = 'http://localhost:3000/request-book';
 	// var getAllBooksUrl = 'https://book-trade-ms.herokuapp.com/get-all-books'
 	var getAllBooksUrl = 'http://localhost:3000/get-all-books'
 	var book;
@@ -76,11 +80,19 @@ _LTracker.push('Hello World');
 	            pages: pages, language: language, industryIdentifier: industryIdentifier, timestamp: timestamp};
 	        console.log('book', book);
 			// target.parents('.book').remove();
-			// $.post('http://localhost:3000/request-book', {'bookRequest': {requestedBy: user, bookDetails: bookDetails}});
+			//$.post('http://localhost:3000/request-book', {'bookRequest': {requestedBy: user, bookDetails: bookDetails}});
 			store.set('book', book);
 			window.open(requestBookUrl);
 		});
 	}
+
+	$('#settings').click(function(e){
+		e.preventDefault();
+		var name = store.get('user') || ""; 
+		var email = store.get('email') || "";
+		$('#myModal').modal('show');
+		$('#name').val('Lara');
+	})
 	
 	$.get(getAllBooksUrl, usersDataFun);
 
