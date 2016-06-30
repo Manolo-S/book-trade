@@ -6,6 +6,7 @@ var logger = require('morgan');
 var passport = require('passport');
 var session = require('express-session');
 var mongoose = require('mongoose');
+var dbUrl = 'mongodb://localhost/bookswap';
 
 var index = require('./routes/index');
 var addNewBook = require('./routes/add-new-book');
@@ -22,7 +23,7 @@ var requestSwap = require('./routes/requestswap');
 var auth = require('./routes/auth');
 var settings = require('./routes/settings');
 
-
+mongoose.connect(dbUrl);
 var app = express();
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(session({secret: 'anything'})); //TODO bekijk Express-session package

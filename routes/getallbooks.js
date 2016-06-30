@@ -10,10 +10,10 @@ var dbUrl = 'mongodb://localhost/bookswap';
 
 
 router.get('/', function(req, res){
-	if (mongoose.connection.readyState === 0){
-		var db = mongoose.connect(dbUrl);
-		// var db = mongoose.connect(dbUrl);
-	}
+	// if (mongoose.connection.readyState === 0){
+	// 	var db = mongoose.connect(dbUrl);
+	// 	// var db = mongoose.connect(dbUrl);
+	// }
 
 	bookModel.find({}, function(err, results ){
 		console.log('bookmodel.find called')
@@ -22,9 +22,9 @@ router.get('/', function(req, res){
 			return;
 		} else if (results.length !== 0){
 			res.json({"results": results});
-		mongoose.connection.close(function(){
-			console.log('Mongoose connection disconnected');
-		});
+		// mongoose.connection.close(function(){
+		// 	console.log('Mongoose connection disconnected');
+		// });
 		}
 	});
 });

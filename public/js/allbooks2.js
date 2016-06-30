@@ -14,10 +14,10 @@
 	// var getAllBooksUrl = 'https://book-trade-ms.herokuapp.com/get-all-books'
 	var getAllBooksUrl = 'http://localhost:3000/get-all-books'
 	var book;
-	var settings = 'http://localhost:3000/settings';
+	var settingsUrl = 'http://localhost:3000/settings';
 	var name;
 	var email;
-	var newUser = 'no';
+	var newUser = 'yes';
 
 
 
@@ -92,31 +92,38 @@
 
 	$('#settings').click(function(e){
 		e.preventDefault();
-		var name = store.get('name') || "jantje"; 
-		var email = store.get('email') || "janneman@hotmail.com";
+		var name = store.get('swap-user'); 
+		var email = store.get('swap-email');
 		$('#myModal').modal('show');
 		$('#name-modal').val(name);
 		$('#email-modal').val(email);
 	})
 
 	$('#save').click(function(){
-		var name = store.get('name') || "jantje"; 
-		var email = store.get('email') || "janneman@hotmail.com";
+		var name = store.get('swap-user'); 
+		var email = store.get('swap-email');
 		var nameModal = $('#name-modal').val();
 		var emailModal = $('#email-modal').val();
 		if (name === nameModal && email === emailModal){
 			$('#myModal').modal('hide');
 			return;
 		}
-		// newUser = !store.get('user')?false:true;
-		console.log(user, nameModal, emailModal)
 		store.set('name', nameModal);
 		store.set('email', emailModal);
-		$.post(settings, {'user': user, 'name': nameModal, 'email': emailModal, 'newuser': newUser}); //TODO implement routes/settings.js and add route to app.js
+		$.post(settingsUrl, {'user': user, 'name': nameModal, 'email': emailModal, 'newuser': newUser}); 
 		$('#myModal').modal('hide');
 	})
-	
+
+	function callback(results){
+		var results = results.results[0];
+		store.set('swap-user', results.name);
+		store.set('swap-email', results.email);
+	}
 	$.get(getAllBooksUrl, usersDataFun);
+
+	if ($('#username').text() !== "" ){
+		$.post(settingsUrl, {'user': user, 'newuser': 'get'}, callback);
+	}
 
 })();
 

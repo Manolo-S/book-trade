@@ -9,65 +9,60 @@ var name;
 var email;
 var newUser;
 
-function callback (err, results){
+function callback1 (err, results){
 	if (err) {
-		console.log(error);
+		console.log(err);
 	} else {
 		console.log(results);
 	}
-
 } 
 
-// function findRequests(r){
-// 	if (r.requestedBook.industryIdentifier === industryIdentifier && r.requestedBook.timestamp === timestamp){
-// 		var otherUser = r.offeredBook.owner;
-// 		bookModel.update({user: otherUser}, {$pull: {requests: {'requestedBook.industryIdentifier': industryIdentifier, 'requestedBook.timestamp': timestamp}}}, callback);
-// 		bookModel.update({user: otherUser}, {$pull: {requests: {'offeredBook.industryIdentifier': industryIdentifier, 'offeredBook.timestamp': timestamp}}}, callback);
-// 		console.log('otherUser', otherUser);
-// 	}
-// }
-
-// function callback2 (err, results){
-// 	console.log('callback2');
-// 	if (err) {
-// 		console.log('error removing book', err)
-// 		return;
-// 	}
-// 	requests = results[0].requests;
-// 	// console.log('requests', requests);
-// 	requests.map(findRequests);
-// }
+function callback2 (err, results){
+	if (err) {
+		console.log(err);
+	} else {
+		console.log(results);
+	}
+} 
 
 
 router.post('/', function(req, res){
-	if (req.body){
-		res.sendStatus(200);
-	}
 	user = req.body.user;
 	name = req.body.name;
 	email = req.body.email;
 	newUser = req.body.newuser;
 	console.log(newUser);
-	if (mongoose.connection.readyState === 0){
-		var db = mongoose.connect(dbUrl);
-	}
+	// if (mongoose.connection.readyState === 0){
+	// 	var db = mongoose.connect(dbUrl);
+	// }
+	
+	if (newUser === 'yes'){
+		console.log('yes');
 
-	if (newUser === "yes"){
-		console.log('if');
-		settingsModel.create({user: user, name: name, email: email}, callback);
-	} else {
+		settingsModel.create({user: user, name: name, email: email}, callback1);
+		res.sendStatus(200);
+		return;
+	} 
+
+	if (newUser === 'no'){
+		console.log('no');
+
 		settingsModel.update({user: user}, {$set: {name: name, email: email}}, callback);
-		console.log('else');
+		res.sendStatus(200);
+		return;
 	}
 
-
-	// bookModel.update({user: user}, {$pull: {books: {'industryIdentifier': industryIdentifier, 'timestamp': timestamp}}}, callback);
-	// bookModel.find({user: user}, callback2);
-
-	// bookModel.update({user: user}, {$pull: {requests: {'offeredBook.industryIdentifier': industryIdentifier, TODO delete this block
-	// 											'offeredBook.timestamp': timestamp}}}, callback);
-	// bookModel.update({user: user}, {$pull: {requests: {'requestedBook.industryIdentifier': industryIdentifier,
-	// 											'requestedBook.timestamp': timestamp}}}, callback);
+	if (newUser === 'get') {
+		console.log('get');
+		settingsModel.find({user: user}, function(err, results){
+			if (err) {
+						console.log(err);
+			} else {
+					console.log('results: ', results)
+			          res.json({"results": results});
+			}
+		});
+	}
 });
 
 module.exports = router;
