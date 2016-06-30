@@ -4,7 +4,6 @@
 (function(){
 	// var user = 'facebook,6789,klaas'; //TODO: change to store userid string after setting login via twitter/facebook
 	var user = 'twitter,1234,jan';  //TODO: change to store userid string after setting login via twitter/facebook
-	var userReg = 'jan,1234,twitter';
 	var owner;
 	store.remove('name');
 	store.remove('email');
@@ -16,8 +15,9 @@
 	var getAllBooksUrl = 'http://localhost:3000/get-all-books'
 	var book;
 	var settings = 'http://localhost:3000/settings';
-	var name = $('#name').text();
-	var email = $('#email').text();
+	var name;
+	var email;
+	var newUser = 'no';
 
 
 
@@ -92,25 +92,27 @@
 
 	$('#settings').click(function(e){
 		e.preventDefault();
-		var name = store.get('name') || "janneman"; 
-		var email = store.get('email') || "janneman@hotmail";
+		var name = store.get('name') || "jantje"; 
+		var email = store.get('email') || "janneman@hotmail.com";
 		$('#myModal').modal('show');
 		$('#name-modal').val(name);
 		$('#email-modal').val(email);
 	})
 
 	$('#save').click(function(){
-		var name-modal = $('#name-modal').val();
-		var email-modal = $('#email-modal').val();
-		if (name === name-modal && email === email-modal){
+		var name = store.get('name') || "jantje"; 
+		var email = store.get('email') || "janneman@hotmail.com";
+		var nameModal = $('#name-modal').val();
+		var emailModal = $('#email-modal').val();
+		if (name === nameModal && email === emailModal){
 			$('#myModal').modal('hide');
 			return;
 		}
-		newUser = (!store.get('swapbooksuser'))?false:true;
-
-		store.set('name', name-modal);
-		store.set('email', email-modal);
-		$.post(settings, {'user', user, 'name': name-modal, 'email': email-modal, 'newuser', newUser}); //TODO implement routes/settings.js and add route to app.js
+		// newUser = !store.get('user')?false:true;
+		console.log(user, nameModal, emailModal)
+		store.set('name', nameModal);
+		store.set('email', emailModal);
+		$.post(settings, {'user': user, 'name': nameModal, 'email': emailModal, 'newuser': newUser}); //TODO implement routes/settings.js and add route to app.js
 		$('#myModal').modal('hide');
 	})
 	

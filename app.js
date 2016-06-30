@@ -20,6 +20,7 @@ var removeRequest = require('./routes/remove-request');
 var requestBook = require('./routes/requestbook');
 var requestSwap = require('./routes/requestswap');
 var auth = require('./routes/auth');
+var settings = require('./routes/settings');
 
 
 var app = express();
@@ -43,6 +44,7 @@ app.use('/swaps', swaps);
 app.use('/requested-books', requestedBooks);
 app.use('/remove-request', removeRequest);
 app.use('/request-swap', requestSwap);
+app.use('/settings', settings);
 
 app.use(logger('dev'));
 
