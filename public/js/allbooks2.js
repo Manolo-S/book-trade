@@ -4,6 +4,7 @@
 (function(){
 	// var user = 'facebook,6789,klaas'; //TODO: change to store userid string after setting login via twitter/facebook
 	var user = 'twitter,1234,jan';  //TODO: change to store userid string after setting login via twitter/facebook
+	var userReg = 'jan,1234,twitter';
 	var owner;
 	store.remove('name');
 	store.remove('email');
@@ -14,6 +15,9 @@
 	// var getAllBooksUrl = 'https://book-trade-ms.herokuapp.com/get-all-books'
 	var getAllBooksUrl = 'http://localhost:3000/get-all-books'
 	var book;
+	var settings = 'http://localhost:3000/settings';
+	var name = $('#name').text();
+	var email = $('#email').text();
 
 
 
@@ -88,10 +92,26 @@
 
 	$('#settings').click(function(e){
 		e.preventDefault();
-		var name = store.get('user') || ""; 
-		var email = store.get('email') || "";
+		var name = store.get('name') || "janneman"; 
+		var email = store.get('email') || "janneman@hotmail";
 		$('#myModal').modal('show');
-		$('#name').val('Lara');
+		$('#name-modal').val(name);
+		$('#email-modal').val(email);
+	})
+
+	$('#save').click(function(){
+		var name-modal = $('#name-modal').val();
+		var email-modal = $('#email-modal').val();
+		if (name === name-modal && email === email-modal){
+			$('#myModal').modal('hide');
+			return;
+		}
+		newUser = (!store.get('swapbooksuser'))?false:true;
+
+		store.set('name', name-modal);
+		store.set('email', email-modal);
+		$.post(settings, {'user', user, 'name': name-modal, 'email': email-modal, 'newuser', newUser}); //TODO implement routes/settings.js and add route to app.js
+		$('#myModal').modal('hide');
 	})
 	
 	$.get(getAllBooksUrl, usersDataFun);
