@@ -1,5 +1,6 @@
 'use strict';
-
+//TODO work on request button if clicked and no swap-email and swap-user available display modal
+//alter title of modal to say 'please enter your contact details'
 
 (function(){
 	// var user = 'facebook,6789,klaas'; //TODO: change to store userid string after setting login via twitter/facebook
