@@ -17,7 +17,7 @@
 	var settingsUrl = 'http://localhost:3000/settings';
 	var name;
 	var email;
-	var newUser = 'yes';
+	var newUser = 'no';
 
 
 
@@ -108,8 +108,8 @@
 			$('#myModal').modal('hide');
 			return;
 		}
-		store.set('name', nameModal);
-		store.set('email', emailModal);
+		store.set('swap-user', nameModal);
+		store.set('swap-email', emailModal);
 		$.post(settingsUrl, {'user': user, 'name': nameModal, 'email': emailModal, 'newuser': newUser}); 
 		$('#myModal').modal('hide');
 	})
@@ -122,6 +122,7 @@
 	$.get(getAllBooksUrl, usersDataFun);
 
 	if ($('#username').text() !== "" ){
+		//compose var user out of socialmedia, id, username TODO
 		$.post(settingsUrl, {'user': user, 'newuser': 'get'}, callback);
 	}
 

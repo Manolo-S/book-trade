@@ -9,37 +9,25 @@ var name;
 var email;
 var newUser;
 
-function callback1 (err, results){
+function callback (err, results){
 	if (err) {
 		console.log(err);
 	} else {
 		console.log(results);
 	}
 } 
-
-function callback2 (err, results){
-	if (err) {
-		console.log(err);
-	} else {
-		console.log(results);
-	}
-} 
-
 
 router.post('/', function(req, res){
 	user = req.body.user;
 	name = req.body.name;
 	email = req.body.email;
 	newUser = req.body.newuser;
-	console.log(newUser);
-	// if (mongoose.connection.readyState === 0){
-	// 	var db = mongoose.connect(dbUrl);
-	// }
+	console.log(newUser, user, name, email);
 	
 	if (newUser === 'yes'){
 		console.log('yes');
 
-		settingsModel.create({user: user, name: name, email: email}, callback1);
+		settingsModel.create({user: user, name: name, email: email}, callback);
 		res.sendStatus(200);
 		return;
 	} 
