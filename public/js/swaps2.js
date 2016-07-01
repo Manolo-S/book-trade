@@ -38,6 +38,9 @@
 
 
 	function displaySwap(swap) {
+		var requesterName = swap.requesterName;
+		var requesterEmail = swap.requesterEmail;
+		console.log(requesterName, requesterEmail);
 		var request = swap.offeredBook.owner === user ? '.requests-mine' : '.requests-others';
 		var swapArr = [swap.offeredBook, swap.requestedBook];
 		var otherPartyUsername = user === swap.offeredBook.owner? swap.requestedBook.owner : swap.offeredBook.owner;
@@ -52,7 +55,7 @@
 			} 
 
 			if (i === 0 && user!== book.owner) {
-				div += '<h4>User <span class="username">' + userName + '</span> would like to swap:</h4>';
+				div += '<h4>' + requesterName + ' (email: ' + requesterEmail + ')</span> would like to swap:</h4>';
 			}
 
 			if (i === 1){

@@ -1,13 +1,13 @@
 'use strict';
 //TODO work on request button if clicked and no swap-email and swap-user available display modal
-//alter title of modal to say 'please enter your contact details'
+//alter title of modal to say 'please enter your'
 
 (function(){
-	// var user = 'facebook,6789,klaas'; //TODO: change to store userid string after setting login via twitter/facebook
-	var user = 'twitter,1234,jan';  //TODO: change to store userid string after setting login via twitter/facebook
+	var user = 'facebook,6789,klaas'; //TODO: change to store userid string after setting login via twitter/facebook
+	// var user = 'twitter,1234,jan';  //TODO: change to store userid string after setting login via twitter/facebook
 	var owner;
-	store.remove('name');
-	store.remove('email');
+	store.remove('swap-user');
+	store.remove('swap-email');
 	store.set('user', user);
 	var user = store.get('user');
 	// var requestBookUrl = 'https://book-trade-ms.herokuapp.com/request-book';
@@ -18,7 +18,7 @@
 	var settingsUrl = 'http://localhost:3000/settings';
 	var name;
 	var email;
-	var newUser = 'no';
+	var newUser = 'yes';
 
 
 
@@ -58,6 +58,8 @@
 	
 
 	function usersDataFun(results){
+
+		console.log('usersfun')
 		var usersArr = results.results;
 
 		$('#content').empty();
@@ -70,6 +72,7 @@
 
 		$('.request-button').click(function(e){
 			var target = $(e.target);
+			
 			var title = target.siblings('#title').text();
 			var authors = target.siblings('#authors').text();
 			var book = target.siblings('.book').text();
@@ -120,11 +123,12 @@
 		store.set('swap-user', results.name);
 		store.set('swap-email', results.email);
 	}
+
 	$.get(getAllBooksUrl, usersDataFun);
 
 	if ($('#username').text() !== "" ){
 		//compose var user out of socialmedia, id, username TODO
-		$.post(settingsUrl, {'user': user, 'newuser': 'get'}, callback);
+		$.post(settingsUrl, {'user': user, 'newuser': 'get'}, callback); //rename key 'newuser'
 	}
 
 })();

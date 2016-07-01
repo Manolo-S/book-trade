@@ -16,6 +16,8 @@ var BookSchema = new Schema({
 });
 
 var RequestSchema = new Schema({
+	requesterName: String,
+	requesterEmail: String,
 	requestedBook: BookSchema,
 	offeredBook: BookSchema
 });

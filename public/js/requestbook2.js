@@ -4,6 +4,7 @@
 	var requestSwapUrl = 'http://localhost:3000/request-swap';
 	// var requestSwapUrl = 'https://book-trade-ms.herokuapp.com/request-swap';
 	var getMyBooksUrl = 'http://localhost:3000/get-my-books';
+	var settingsUrl = 'http://localhost:3000/settings';
 	// var getMyBooksUrl = 'https://book-trade-ms.herokuapp.com/get-my-books';
 	var user = store.get('user');
 	var book = store.get('book');
@@ -90,20 +91,38 @@
 			var language = offeredBook[6];
 			var industryIdentifier = offeredBook[7];
 			var timestamp = offeredBook[8];
+			var requesterName = store.get('swap-user');
+			var requesterEmail = store.get('swap-email');
 
 			offeredBook = {owner: owner, image: image, title: title, authors: authors, publishedDate: publishedDate,
 	            pages: pages, language: language, industryIdentifier: industryIdentifier, timestamp: timestamp};
 
 			var request = {requestedBook: book, offeredBook: offeredBook};
+
 			console.log('request', request);
-			$.post(requestSwapUrl, {'swapProposal': {requestedBook: book, offeredBook: offeredBook}});
+			$.post(requestSwapUrl, {swapProposal: {requesterName: requesterName, requesterEmail: requesterEmail, requestedBook: book, offeredBook: offeredBook}});
 			// $.post('http://localhost:3000/request-book', {'bookRequest': {requestedBy: user, bookDetails: book}});
 
 		});
 	}
 
+	$('#save').click(function(){
+		var nameModal = $('#name-modal').val();
+		var emailModal = $('#email-modal').val();
+		store.set('swap-user', nameModal);
+		store.set('swap-email', emailModal);
+		$.post(settingsUrl, {'user': user, 'name': nameModal, 'email': emailModal, 'newuser': 'yes'}); 
+		$('#myModal').modal('hide');
+	})
+
 	$('.close-button').click(function(){window.close()});
 
 	$.post(getMyBooksUrl, {'user': user}, displayBooks);
 
+	var name = store.get('swap-user'); 
+	if (!name){ //change to !name
+		$('#myModal').modal('show');
+	}
+
 })();
+

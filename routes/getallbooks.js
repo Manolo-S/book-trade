@@ -5,7 +5,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var bookModel = require('../config/book-model.js');
 var books;
-var dbUrl = 'mongodb://localhost/bookswap';
+// var dbUrl = 'mongodb://localhost/bookswap';
 // var dbUrl = 'mongodb://piet:snot@ds021000.mlab.com:21000/bookswap';
 
 
@@ -14,6 +14,8 @@ router.get('/', function(req, res){
 	// 	var db = mongoose.connect(dbUrl);
 	// 	// var db = mongoose.connect(dbUrl);
 	// }
+
+	console.log('getall books called');
 
 	bookModel.find({}, function(err, results ){
 		console.log('bookmodel.find called')

@@ -16,16 +16,7 @@ var requestedBy;
 function callback (err, results){
 	if (err) {
 		console.log('error storing book', err);
-		// mongoose.connection.close(function() { //TODO add err object as function parameter??
-	 //        console.log('disconnected from DB');
-		// });
 	}
-	// } else {
-	// 	console.log(results);
-	// 	mongoose.connection.close(function() { //TODO add err object as function parameter??
-	//         console.log('disconnected from DB');
-	// 	});
-	// }
 } 
 
 
